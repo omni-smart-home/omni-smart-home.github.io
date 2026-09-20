@@ -117,3 +117,5 @@
 .sample-image-link{display:block;background:#f5f5f5;border-radius:5px;overflow:hidden}.sample-image-link img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:contain}.sample-card .sample-transcript{font-size:11px;line-height:1.6;color:var(--muted);margin-top:12px}.audio-status:empty{display:none}
 
 .generation-steps h4{min-height:2.8em}
+
+#demos>.carousel{max-width:665px}
