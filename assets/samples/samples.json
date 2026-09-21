@@ -24,8 +24,8 @@
   "query": "In 10 minutes, power this on.",
   "target_device": "Air purifier",
   "source": "benchmark_real_world_final/c1/q4/feasible/jihoo_c1_q4_feasible_seg00",
-  "trim_start_s": 0.65,
-  "trim_end_s": 2.5,
+  "trim_start_s": 0.6,
+  "trim_end_s": 3.0,
   "files": {
    "video": "real/g1_q3.mp4",
    "poster": "real/g1_q3-poster.jpg"
