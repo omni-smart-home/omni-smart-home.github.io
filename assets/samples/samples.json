@@ -1,325 +1,332 @@
 [
-  {
-    "domain": "real",
-    "g": "G0",
-    "paper_q": "Q1",
-    "query": "What's the current level of the dimmable light in the living room?",
-    "files": {
-      "video": "real/g0_q1.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G0",
-    "paper_q": "Q2",
-    "query": "Please turn on the light in here.",
-    "files": {
-      "video": "real/g0_q2.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G0",
-    "paper_q": "Q3",
-    "query": "in 5 minutes, Turn on the microwave in the kitchen and get it running.",
-    "files": {
-      "video": "real/g0_q3.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G0",
-    "paper_q": "Q4",
-    "query": "The air in the kitchen feels kinda dusty.",
-    "files": {
-      "video": "real/g0_q4.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G1",
-    "paper_q": "Q1",
-    "query": "What’s the product name of that?",
-    "files": {
-      "video": "real/g1_q1.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G1",
-    "paper_q": "Q2",
-    "query": "Turn that on and set it to cooling mode.",
-    "files": {
-      "video": "real/g1_q2.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G1",
-    "paper_q": "Q3",
-    "query": "In 10 minutes, power this on.",
-    "files": {
-      "video": "real/g1_q3.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G2",
-    "paper_q": "Q1",
-    "query": "What’s the product name of the device making that beeping sound?",
-    "files": {
-      "video": "real/g2_q1.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G2",
-    "paper_q": "Q2",
-    "query": "Hey, the device making the sharp alarm beeps, silence it now",
-    "files": {
-      "video": "real/g2_q2.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G2",
-    "paper_q": "Q3",
-    "query": "in 5 minutes, Stop the device making that melodic chime now so it is no longer running",
-    "files": {
-      "video": "real/g2_q3.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G3",
-    "paper_q": "Q1",
-    "query": "What’s the vendor name of the device making that sound on my left ?",
-    "files": {
-      "video": "real/g3_q1.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G3",
-    "paper_q": "Q2",
-    "query": "Hey, turn off the device in front of me.",
-    "files": {
-      "video": "real/g3_q2.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G3",
-    "paper_q": "Q3",
-    "query": "In 5 minutes, turn the device on my left on, set it to delicate mode and have it running.",
-    "files": {
-      "video": "real/g3_q3.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G4",
-    "paper_q": "Q1",
-    "query": "What's the vendor ID of the AC in my room?",
-    "files": {
-      "video": "real/g4_q1.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G4",
-    "paper_q": "Q2",
-    "query": "Turn off the humidifier in my room now.",
-    "files": {
-      "video": "real/g4_q2.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G4",
-    "paper_q": "Q3",
-    "query": "In 10 minutes, turn on the dimmer light in my room and set it to 90 percent.",
-    "files": {
-      "video": "real/g4_q3.mp4"
-    }
-  },
-  {
-    "domain": "real",
-    "g": "G4",
-    "paper_q": "Q4",
-    "query": "The air feels kind of dusty and my throat is a bit scratchy in my room.",
-    "files": {
-      "video": "real/g4_q4.mp4"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G0",
-    "paper_q": "Q1",
-    "query": "Hey, can you tell me the, uh, vendor name of the microwave in the, uh, kitchen?",
-    "files": {
-      "image": "syn/g0_q1.png",
-      "audio": "syn/g0_q1.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G0",
-    "paper_q": "Q2",
-    "query": "Hey, start, start running the dishwasher in the kitchen in the, uh, kitchen now.",
-    "files": {
-      "image": "syn/g0_q2.png",
-      "audio": "syn/g0_q2.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G0",
-    "paper_q": "Q3",
-    "query": "switch the, I mean, schedule the, the audio player in the living room to turn on in 15 minutes, do not turn it on now.",
-    "files": {
-      "image": "syn/g0_q3.png",
-      "audio": "syn/g0_q3.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G0",
-    "paper_q": "Q4",
-    "query": "Ugh, the living room feels too bright. My eyes keep squinting and they feel tired after just a few minutes.",
-    "files": {
-      "image": "syn/g0_q4.png",
-      "audio": "syn/g0_q4.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G1",
-    "paper_q": "Q1",
-    "query": "What level is this at right now?",
-    "files": {
-      "image": "syn/g1_q1.png",
-      "audio": "syn/g1_q1.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G1",
-    "paper_q": "Q2",
-    "query": "Turn this on, set this to quick normal, and start this running.",
-    "files": {
-      "image": "syn/g1_q2.png",
-      "audio": "syn/g1_q2.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G1",
-    "paper_q": "Q3",
-    "query": "In nine minutes, switch this to KBS2.",
-    "files": {
-      "image": "syn/g1_q3.png",
-      "audio": "syn/g1_q3.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G2",
-    "paper_q": "Q1",
-    "query": "Hey, how much time is left on that device making electronic music?",
-    "files": {
-      "image": "syn/g2_q1.png",
-      "audio": "syn/g2_q1.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G2",
-    "paper_q": "Q2",
-    "query": "Silence the device making the alarm beeps now",
-    "files": {
-      "image": "syn/g2_q2.png",
-      "audio": "syn/g2_q2.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G2",
-    "paper_q": "Q3",
-    "query": "Schedule setting the volume of the device that is playing that music to 10 percent in 27 minutes and do not set it now.",
-    "files": {
-      "image": "syn/g2_q3.png",
-      "audio": "syn/g2_q3.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G3",
-    "paper_q": "Q1",
-    "query": "Can you tell me the vendor name of the device making the sound on my right?",
-    "files": {
-      "image": "syn/g3_q1.png",
-      "audio": "syn/g3_q1.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G3",
-    "paper_q": "Q2",
-    "query": "Stop the device making that sound on my right and a little lower down so it is no longer running.",
-    "files": {
-      "image": "syn/g3_q2.png",
-      "audio": "syn/g3_q2.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G3",
-    "paper_q": "Q3",
-    "query": "Schedule the one in front of me to turn on in 11 minutes and do not turn it on now.",
-    "files": {
-      "image": "syn/g3_q3.png",
-      "audio": "syn/g3_q3.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G4",
-    "paper_q": "Q1",
-    "query": "Which robot-vacuum phases does the RVC in my room support?",
-    "files": {
-      "image": "syn/g4_q1.png",
-      "audio": "syn/g4_q1.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G4",
-    "paper_q": "Q2",
-    "query": "Turn on the air conditioner in my room, set it to cooling and the fan to fifty percent.",
-    "files": {
-      "image": "syn/g4_q2.png",
-      "audio": "syn/g4_q2.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G4",
-    "paper_q": "Q3",
-    "query": "Before I head out, power off the microwave in my room exactly 19 minutes before dishwasher in the home office finishes cleaning.",
-    "files": {
-      "image": "syn/g4_q3.png",
-      "audio": "syn/g4_q3.wav"
-    }
-  },
-  {
-    "domain": "syn",
-    "g": "G4",
-    "paper_q": "Q4",
-    "query": "My room is too bright.",
-    "files": {
-      "image": "syn/g4_q4.png",
-      "audio": "syn/g4_q4.wav"
-    }
+ {
+  "domain": "real",
+  "g": "G0",
+  "paper_q": "Q2",
+  "dataset": "c0/q3/feasible",
+  "feasible": true,
+  "query": "Hey, switch the channel of the TV in here to SBS.",
+  "target_device": "TV",
+  "source": "benchmark_real_world_final/c0/q3/feasible/jihoo_c0_q3_feasible_seg02",
+  "trim_start_s": null,
+  "files": {
+   "video": "real/g0_q2.mp4",
+   "poster": "real/g0_q2-poster.jpg"
   }
+ },
+ {
+  "domain": "real",
+  "g": "G1",
+  "paper_q": "Q3",
+  "dataset": "c1/q4/feasible",
+  "feasible": true,
+  "query": "In 10 minutes, power this on.",
+  "target_device": "Air purifier",
+  "source": "benchmark_real_world_final/c1/q4/feasible/jihoo_c1_q4_feasible_seg00",
+  "trim_start_s": 0.8,
+  "files": {
+   "video": "real/g1_q3.mp4",
+   "poster": "real/g1_q3-poster.jpg"
+  }
+ },
+ {
+  "domain": "real",
+  "g": "G2",
+  "paper_q": "Q1",
+  "dataset": "c2/q1/feasible",
+  "feasible": true,
+  "query": "What’s the product name of the device making that beeping sound?",
+  "target_device": "Microwave",
+  "source": "benchmark_real_world_final/c2/q1/feasible/park_c2_q1_feasible_seg00",
+  "trim_start_s": null,
+  "files": {
+   "video": "real/g2_q1.mp4",
+   "poster": "real/g2_q1-poster.jpg"
+  }
+ },
+ {
+  "domain": "real",
+  "g": "G3",
+  "paper_q": "Q1",
+  "dataset": "c3v/q1/feasible",
+  "feasible": true,
+  "query": "What brand makes the device in front of me?",
+  "target_device": "TV",
+  "source": "benchmark_real_world_final/c3v/q1/feasible/haam_c3v_q1_feasible_seg00",
+  "trim_start_s": null,
+  "files": {
+   "video": "real/g3_q1.mp4",
+   "poster": "real/g3_q1-poster.jpg"
+  }
+ },
+ {
+  "domain": "real",
+  "g": "G4",
+  "paper_q": "Q4",
+  "dataset": "c4/q2/infeasible",
+  "feasible": false,
+  "query": "It is muggy in my room, my skin feels sticky.",
+  "target_device": "Dehumidifier · Son's room",
+  "source": "benchmark_real_world_final/c4/q2/infeasible/suho_c4_q2_infeasible_seg02",
+  "trim_start_s": null,
+  "files": {
+   "video": "real/g4_q4.mp4",
+   "poster": "real/g4_q4-poster.jpg"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G0",
+  "paper_q": "Q1",
+  "dataset": "c0/q1/easy",
+  "feasible": true,
+  "query": "Hey, can you tell me what the remaining time is on the tv in the living room right now?",
+  "target_device": "TV",
+  "source": "benchmark_final/c0/q1/easy/00800-TEEsavR23oF_room_1__qt1_c0_c0_seed_1",
+  "trim_start_s": 2.0,
+  "files": {
+   "image": "syn/g0_q1.png",
+   "audio": "syn/g0_q1.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G0",
+  "paper_q": "Q2",
+  "dataset": "c0/q3/easy",
+  "feasible": true,
+  "query": "Hey, turn on the dimmable light 1 in the living room and set its brightness to 100 percent.",
+  "target_device": "Dimmable light",
+  "source": "benchmark_final/c0/q3/easy/00815-h1zeeAwLh9Z_room_7__q3_c0_c0_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g0_q2.png",
+   "audio": "syn/g0_q2.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G0",
+  "paper_q": "Q3",
+  "dataset": "c0/q4/easy",
+  "feasible": true,
+  "query": "Hey, schedule a pause for the dishwasher in the kitchen in 5 minutes, do not pause it now.",
+  "target_device": "Dishwasher",
+  "source": "benchmark_final/c0/q4/easy/00877-4ok3usBNeis_room_8__qt4_c0_c0_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g0_q3.png",
+   "audio": "syn/g0_q3.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G0",
+  "paper_q": "Q4",
+  "dataset": "c0/q2/easy",
+  "feasible": true,
+  "query": "Ugh, I am a bit too warm in the living room. My face feels flushed. I am sweating a little and getting sluggish from the heat.",
+  "target_device": "Air conditioner",
+  "source": "benchmark_final/c0/q2/easy/00832-qyAac8rV8Zk_room_14__qt2_c0_c0_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g0_q4.png",
+   "audio": "syn/g0_q4.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G1",
+  "paper_q": "Q1",
+  "dataset": "c1/q1/easy",
+  "feasible": true,
+  "query": "Which operating phases does this support?",
+  "target_device": "Robot vacuum",
+  "source": "benchmark_final/c1/q1/easy/00861-GLAQ4DNUx5U_room_5__q1_c1_c1_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g1_q1.png",
+   "audio": "syn/g1_q1.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G1",
+  "paper_q": "Q2",
+  "dataset": "c1/q3/mid",
+  "feasible": true,
+  "query": "Play this.",
+  "target_device": "TV",
+  "source": "benchmark_final/c1/q3/mid/00839-zt1RVoi7PcG_room_14__q3_c1_c1_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g1_q2.png",
+   "audio": "syn/g1_q2.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G1",
+  "paper_q": "Q3",
+  "dataset": "c1/q4/easy",
+  "feasible": true,
+  "query": "Turn this on in five minutes.",
+  "target_device": "On/off light",
+  "source": "benchmark_final/c1/q4/easy/00802-wcojb4TFT35_room_5__qt4_c1_c1_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g1_q3.png",
+   "audio": "syn/g1_q3.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G2",
+  "paper_q": "Q1",
+  "dataset": "c2/q1/mid",
+  "feasible": true,
+  "query": "I hear that machine noise. What is the product name of the device making that machine noise?",
+  "target_device": "Dishwasher",
+  "source": "benchmark_final/c2/q1/mid/00802-wcojb4TFT35_room_3__qt1_c2_c2_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g2_q1.png",
+   "audio": "syn/g2_q1.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G2",
+  "paper_q": "Q2",
+  "dataset": "c2/q3/easy",
+  "feasible": true,
+  "query": "Hey, stop that whirring sound right now.",
+  "target_device": "Fan",
+  "source": "benchmark_final/c2/q3/easy/00891-cvZr5TUy5C5_room_6__q3_c2_c2_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g2_q2.png",
+   "audio": "syn/g2_q2.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G2",
+  "paper_q": "Q3",
+  "dataset": "c2/q4/easy",
+  "feasible": true,
+  "query": "Schedule setting the volume of that upbeat music to 70 percent in 12 minutes and do not do it now",
+  "target_device": "TV",
+  "source": "benchmark_final/c2/q4/easy/00862-LT9Jq6dN3Ea_room_24__qt4_c2_c2_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g2_q3.png",
+   "audio": "syn/g2_q3.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G3",
+  "paper_q": "Q1",
+  "dataset": "c3a/q1/easy",
+  "feasible": true,
+  "query": "Um, can you tell me what operational states are available for the device making that sound in front of me?",
+  "target_device": "Robot vacuum",
+  "source": "benchmark_final/c3a/q1/easy/00808-y9hTuugGdiq_room_16",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g3_q1.png",
+   "audio": "syn/g3_q1.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G3",
+  "paper_q": "Q2",
+  "dataset": "c3v/q3/easy",
+  "feasible": true,
+  "query": "Turn on the device above my head now.",
+  "target_device": "On/off light",
+  "source": "benchmark_final/c3v/q3/easy/00849-a8BtkwhxdRV_room_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g3_q2.png",
+   "audio": "syn/g3_q2.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G3",
+  "paper_q": "Q3",
+  "dataset": "c3a/q4/mid",
+  "feasible": true,
+  "query": "Schedule the thing making that sound on my right to stop running in 13 minutes and do not stop it now.",
+  "target_device": "Dishwasher",
+  "source": "benchmark_final/c3a/q4/mid/00827-BAbdmeyTvMZ_room_8",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g3_q3.png",
+   "audio": "syn/g3_q3.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G4",
+  "paper_q": "Q1",
+  "dataset": "c4/q1/easy",
+  "feasible": true,
+  "query": "Is the coffee machine in my room running?",
+  "target_device": "Coffee machine · Grandpa's room",
+  "source": "benchmark_final/c4/q1/easy/00808-y9hTuugGdiq_room_13__q1_c4_c4_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g4_q1.png",
+   "audio": "syn/g4_q1.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G4",
+  "paper_q": "Q2",
+  "dataset": "c4/q3/easy",
+  "feasible": true,
+  "query": "Turn the dishwasher in my room on and start it running.",
+  "target_device": "Dishwasher · Dad's room",
+  "source": "benchmark_final/c4/q3/easy/00813-svBbv1Pavdk_room_10__q3_c4_c4_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g4_q2.png",
+   "audio": "syn/g4_q2.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G4",
+  "paper_q": "Q3",
+  "dataset": "c4/q4/easy",
+  "feasible": true,
+  "query": "After dinner, exactly 12 minutes after dishwasher in the bathroom finishes cleaning, power off the microwave in my room.",
+  "target_device": "Microwave · Dad's room",
+  "source": "benchmark_final/c4/q4/easy/00862-LT9Jq6dN3Ea_room_14__qt4_2_c4_c4_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g4_q3.png",
+   "audio": "syn/g4_q3.wav"
+  }
+ },
+ {
+  "domain": "syn",
+  "g": "G4",
+  "paper_q": "Q4",
+  "dataset": "c4/q2/easy",
+  "feasible": true,
+  "query": "My room is too dark.",
+  "target_device": "On/off light · Grandma's room",
+  "source": "benchmark_final/c4/q2/easy/00800-TEEsavR23oF_room_5__q2_c4_c4_seed_1",
+  "trim_start_s": null,
+  "files": {
+   "image": "syn/g4_q4.png",
+   "audio": "syn/g4_q4.wav"
+  }
+ }
 ]

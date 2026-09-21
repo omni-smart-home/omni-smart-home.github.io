@@ -334,6 +334,11 @@ body {
   overflow: hidden;
 }
 
+/* Room under the slides for the carousel's page dots (positioned inside .slider). */
+#samples .sample-carousel .slider {
+  padding-bottom: 2rem;
+}
+
 .sample-carousel .item {
   margin: 5px;
   overflow: hidden;
@@ -365,8 +370,49 @@ body {
   letter-spacing: 0.08em;
 }
 
-.sample-domain-title {
+.sample-toggle {
   margin-bottom: 0.75rem !important;
+}
+
+/* Scoped by id: .hero.is-light otherwise paints the active tab dark grey. */
+#samples .sample-toggle li:not(.is-active) a {
+  background-color: #fff;
+}
+
+#samples .sample-toggle li.is-active a,
+#samples .sample-toggle li.is-active a:hover {
+  background-color: #87ceeb;
+  border-color: #87ceeb;
+  color: #0b3954;
+  font-weight: 600;
+}
+
+.sample-pane-note {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+/* Real-world samples: one roughly square card per slide. */
+#real-carousel {
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.sample-target {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-top: 0.4rem;
+}
+
+.sample-target span {
+  display: inline-block;
+  margin-right: 0.35rem;
+  font-size: 0.68rem;
+  font-weight: bold;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .sample-query {
@@ -394,6 +440,7 @@ video.sample-media {
 }
 
 .sample-audio {
+  display: block;
   width: 100%;
   height: 34px;
   margin-top: 0.5rem;

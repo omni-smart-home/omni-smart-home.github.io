@@ -39,6 +39,31 @@ $(document).ready(function() {
       });
     });
 
+    // Benchmark samples: Synthetic / Real-world toggle. The real-world carousel starts
+    // hidden, so it is attached the first time its pane is shown (it cannot measure
+    // itself while hidden).
+    var realCarousel = null;
+    document.querySelectorAll('[data-sample-domain]').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var domain = tab.getAttribute('data-sample-domain');
+        pauseAllMedia();
+        document.querySelectorAll('[data-sample-domain]').forEach(function(t) {
+          t.classList.toggle('is-active', t === tab);
+        });
+        document.querySelectorAll('[data-sample-pane]').forEach(function(pane) {
+          pane.classList.toggle('is-hidden', pane.getAttribute('data-sample-pane') !== domain);
+        });
+        if (domain === 'real' && !realCarousel && document.getElementById('real-carousel')) {
+          realCarousel = bulmaCarousel.attach('#real-carousel', options)[0];
+          realCarousel.on('before:show', function() {
+            pauseAllMedia();
+          });
+        }
+        // Visible carousels re-measure their slides on resize.
+        window.dispatchEvent(new Event('resize'));
+      });
+    });
+
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) {
         pauseAllMedia();
@@ -55,3 +80,4 @@ function pauseAllMedia(except) {
     }
   });
 }
+
