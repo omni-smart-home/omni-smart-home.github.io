@@ -45,7 +45,7 @@
       </span>
       </a>
       <a class="navbar-item" href="#demos">Demos</a>
-      <a class="navbar-item" href="#overview">Overview</a>
+      <a class="navbar-item" href="#abstract">Abstract</a>
       <a class="navbar-item" href="#benchmark">Benchmark</a>
       <a class="navbar-item" href="#prome">Simple agentic baseline</a>
       <a class="navbar-item" href="#results">Results</a>
@@ -89,7 +89,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <a href="./assets/figures/main.pdf" target="_blank" rel="noopener">
-        <img src="./assets/images/overview.webp" width="3200" height="1378"
+        <img src="./assets/images/overview.webp" width="3200" height="1357"
              alt="Figure 1: The same air-conditioner request expressed through pointing, humming sounds, egocentric direction, and room ownership.">
       </a>
       <p class="figure-caption has-text-centered">
@@ -162,22 +162,33 @@
 </section>
 
 
-<section class="section" id="overview">
+<section class="section" id="abstract">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Overview</h2>
+        <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            OmniSmartHome is a multimodal smart-home benchmark in which fulfilling a user&rsquo;s
-            instruction requires combining evidence scattered across multiple modalities.
+            Smart-home assistants are expected to act on natural user requests, yet existing
+            benchmarks largely assume that the intended device is explicitly specified in text.
+            In everyday interaction, however, people often leave this information implicit and
+            convey it through non-verbal cues such as gestures, sounds, spatial context, or speaker
+            identity. In this paper, we introduce <b>OmniSmartHome</b>, a multimodal smart-home
+            benchmark in which agents must ground such cues to the intended device before executing
+            the requested operation. OmniSmartHome contains <b>1,360</b> synthetic and <b>272</b>
+            real-world episodes with visual observations and spatial audio, covering five grounding
+            types: speech, gesture, sound, space, and user identity.
           </p>
           <p>
-            OmniSmartHome contains <b>1,360</b> synthetic and <b>272</b> real-world episodes. Every
-            episode provides visual observations paired with spatial audio, along with textual
-            metadata about rooms, devices, and the home environment. To successfully resolve such
-            requests, an agent must perceive task-relevant information in visual and acoustic
-            observations and aggregate this evidence to infer the user&rsquo;s intended target device.
+            We evaluate 16 recent omni-modal large language models and find a clear gap between
+            explicit and implicit grounding. Models perform well when the target device is directly
+            named in speech, but struggle when it must be inferred from multimodal evidence. To
+            study whether these failures can be mitigated through agentic perception, we further
+            propose <b>PROME</b> (PROcedural Memory for multimodal Evidence gathering), a
+            lightweight framework that equips an agent with specialized audio-visual perception
+            tools and a learned procedural memory for deciding when to invoke them and how to
+            combine their outputs. PROME consistently improves grounding and task execution across
+            six Omni-LLMs.
           </p>
         </div>
       </div>
@@ -193,7 +204,13 @@
         <h2 class="title is-3">Benchmark</h2>
         <div class="content has-text-justified">
           <p>
-            Each episode is characterized by a grounding type, a query type, and a feasibility type.
+            OmniSmartHome defines an <i>episode profile</i> along three dimensions: a
+            <b>grounding type</b>, indicating which modality carries the evidence needed to resolve
+            the intended target device; a <b>query type</b>, indicating what the user asks for; and a
+            <b>feasibility type</b>, indicating whether the request can be fulfilled in the scene.
+            Every episode provides a visual observation of the room where the speaker is, a
+            first-order Ambisonics recording of the spoken request together with the sounds of
+            active devices, and the initial home state: rooms, devices, and household members.
           </p>
         </div>
       </div>
@@ -241,30 +258,77 @@
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #e9e9e9">G0</span></td>
               <td>Speech</td>
-              <td class="query-description">The target is resolved from the spoken utterance through correct speech recognition.</td>
+              <td class="query-description">The user explicitly names the target device in the spoken utterance, requiring the agent to correctly recognize the speech.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #c8e5ce">G1</span></td>
               <td>Gesture</td>
-              <td class="query-description">The target is resolved by interpreting the speaker&rsquo;s gesture in the visual scene.</td>
+              <td class="query-description">The user refers to the target deictically (&ldquo;turn <i>that</i> off&rdquo;) while pointing toward it, requiring the agent to interpret the gesture and ground it in the visual scene.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #f7e4bf">G2</span></td>
               <td>Sound</td>
-              <td class="query-description">The target is resolved by detecting and localizing the corresponding device&rsquo;s sound source.</td>
+              <td class="query-description">The target is specified by the sound it emits (&ldquo;stop that <i>humming noise</i>&rdquo;), requiring the agent to detect and localize the sound source and associate it with the corresponding device.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #d8cfeb">G3</span></td>
               <td>Space</td>
-              <td class="query-description">The target is resolved by reasoning about the speaker&rsquo;s egocentric direction.</td>
+              <td class="query-description">The target is specified relative to the speaker&rsquo;s egocentric direction (&ldquo;turn off the light <i>on my left</i>&rdquo;), requiring the agent to reason about that direction from the speaker&rsquo;s perspective.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #f5cfca">G4</span></td>
               <td>Identity</td>
-              <td class="query-description">The target is resolved by identifying the speaker and interpreting the person-specific reference.</td>
+              <td class="query-description">The target depends on the identity of the speaker (&ldquo;turn off the AC in <i>my room</i>&rdquo;), requiring the agent to identify who is speaking and resolve the person-specific reference.</td>
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-three-fifths">
+        <h3 class="title is-4">Four query types</h3>
+        <table class="table is-fullwidth query-list">
+          <tbody>
+            <tr>
+              <td><b>Q1</b></td>
+              <td>State inquiry</td>
+              <td class="query-description">The user asks about the current state or attributes of a device (&ldquo;What temperature is the AC set to?&rdquo;); the agent retrieves the information and reports it in a textual response.</td>
+            </tr>
+            <tr>
+              <td><b>Q2</b></td>
+              <td>Explicit device control</td>
+              <td class="query-description">The user asks the agent to set a specific device to a desired state (&ldquo;turn that off&rdquo;); the agent executes the corresponding device operation.</td>
+            </tr>
+            <tr>
+              <td><b>Q3</b></td>
+              <td>Workflow scheduling</td>
+              <td class="query-description">The user requests device actions at a future time or in coordination with another event (&ldquo;in ten minutes, turn that off&rdquo;); the agent schedules the appropriate workflow.</td>
+            </tr>
+            <tr>
+              <td><b>Q4</b></td>
+              <td>Implicit intent</td>
+              <td class="query-description">The user expresses a desired outcome without specifying the action (&ldquo;it&rsquo;s too cold in my room&rdquo;); the agent infers the intent and the appropriate device operation. Q4 is instantiated only for G0 and G4.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="column">
+        <h3 class="title is-4">Feasibility types</h3>
+        <div class="content feasibility-text">
+          <p>
+            <b>Feasible</b> synthetic episodes come in three difficulty levels &mdash; easy, medium,
+            and hard &mdash; according to the distractors in the scene. In gesture-grounded episodes,
+            for example, easy scenes feature a single candidate device, medium scenes contain
+            multiple devices, and hard scenes add non-speakers, so the speaker must be detected first.
+          </p>
+          <p>
+            <b>Infeasible</b> episodes fall into three classes: <i>non-existent resources</i>, where
+            the referenced device or perceptual cue is absent; <i>physical limits</i>, where the
+            device cannot realize the requested change; and <i>temporal contradictions</i>, where the
+            requested timing conflicts with other constraints.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -602,18 +666,38 @@
         <h2 class="title is-3">Simple agentic baseline</h2>
         <div class="content has-text-justified">
           <p>
-            <b>PRO</b>cedural <b>M</b>emory for multimodal <b>E</b>vidence gathering: a lightweight
-            agentic baseline for adaptive evidence acquisition.
+            Before operating a device, an agent in OmniSmartHome must first ground which device the
+            user is referring to. This requires actively gathering multimodal evidence and
+            integrating it according to how the request is grounded in the environment. To support
+            this process, we introduce <b>PROME</b> (<b>PRO</b>cedural <b>M</b>emory for multimodal
+            <b>E</b>vidence gathering), a lightweight agentic baseline for adaptive evidence
+            acquisition. PROME equips the agent with a set of <b>multimodal perception tools</b> and
+            augments its reasoning with a <b>procedural memory</b> that captures reusable strategies
+            for resolving grounding ambiguities.
           </p>
           <p>
-            PROME equips the agent with a set of <b>multimodal perception tools</b> and augments its
-            reasoning with <b>procedural memory</b> that captures reusable strategies for resolving
-            grounding ambiguities.
+            <b>Multimodal perception tools.</b> The agent can call tools for speech recognition,
+            sound localization, pointing, head-pose recognition, and identity matching.
           </p>
           <p>
-            The perception tools extract audio, visual, and spatial evidence through speech
-            recognition, sound localization, pointing, and identity matching. The procedural memory
-            guides tool invocation and the integration of tool outputs.
+            <b>Procedural memory.</b> The memory is a bank of <i>grounding procedures</i>
+            (&sigma;, &pi;<sub>&sigma;</sub>). Each one pairs a type of grounding ambiguity &sigma;,
+            described in natural language (e.g., &ldquo;identify the device by its audible
+            sound&rdquo;), with a policy &pi;<sub>&sigma;</sub> over tool actions conditioned on the
+            agent&rsquo;s current grounding state, which summarizes the evidence acquired so far and
+            the remaining uncertainty. At inference time, the agent uses the multimodal input once,
+            at the beginning of the episode, to retrieve the most relevant ambiguity &sigma;*. After
+            each ReAct step it updates the state, samples the next action from
+            &pi;<sub>&sigma;*</sub>, and injects it as a brief <code>[Grounding Hint]</code> before
+            the next reasoning step.
+          </p>
+          <p>
+            <b>Memory construction.</b> The procedures are distilled from 680 synthetic training
+            episodes, generated with the same pipeline as the benchmark from the HM3D training
+            split. An Omni-LLM groups the episodes by grounding ambiguity and describes each group in
+            natural language. Each policy starts from a simple cost prior, adjusted by how much each
+            perception tool helps, and is then refined with a policy-gradient update that uses
+            grounding correctness as the reward.
           </p>
         </div>
       </div>
@@ -622,8 +706,8 @@
     <div class="columns is-centered">
       <div class="column is-full-width has-text-centered">
         <a href="./assets/figures/agent.pdf" target="_blank" rel="noopener">
-          <img src="./assets/images/prome.webp" width="3200" height="967"
-               alt="Figure 4: PROME adds perception tools, a schema selector, a state tracker, and procedural memory to the baseline ReAct agent loop."
+          <img src="./assets/images/prome.webp" width="3200" height="951"
+               alt="Figure 4: PROME adds perception tools, a grounding ambiguity table, a state update, and a procedure policy to the baseline ReAct agent loop."
                loading="lazy">
         </a>
         <p class="figure-caption">
@@ -642,6 +726,15 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Main results</h2>
+        <div class="content has-text-justified">
+          <p>
+            We evaluate 16 Omni-LLMs: seven open-source models with fewer than 10B parameters, five
+            larger open-source models, and four proprietary models. For models that do not support
+            spatial audio input, the first-order Ambisonics recordings are downmixed to mono. PROME
+            is applied to six of the models, each with a memory built from the 680 synthetic
+            training episodes.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -695,6 +788,33 @@
               <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+4.0</span></td><td class="col-all"><span class="gain">+6.1</span></td><td><span class="gain">+1.5</span></td><td><span class="loss">-1.1</span></td><td><span class="loss">-0.4</span></td><td><span class="loss">-0.4</span></td><td><span class="gain">+4.9</span></td><td><span class="gain">+18.1</span></td><td><span class="gain">+4.8</span></td><td><span class="gain">+3.8</span></td><td><span class="gain">+8.6</span></td><td><span class="gain">+10.6</span></td></tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            <b>Baselines.</b> Small open-source models show generally low grounding accuracy across
+            all grounding types, with MiniCPM-o-4.5 performing best in this group. Their goal
+            accuracy is often substantially lower than their grounding accuracy, in some cases by
+            more than a factor of two: even when these models identify the target device, they still
+            struggle to complete the requested goal. Larger open-source models achieve higher overall
+            accuracy with a smaller gap between grounding and goal performance. Their grounding is
+            particularly strong on G0, where the target can be resolved from speech alone, but drops
+            on G1&ndash;G4, which require additional multimodal evidence. Proprietary models
+            generally outperform open-source models, yet show a similar gap between G0 and
+            G1&ndash;G4, with particularly large drops on G4. The contrast between nearly saturated
+            performance on G0 and lower performance on G1&ndash;G4 highlights multimodal grounding as
+            the primary challenge of the benchmark.
+          </p>
+          <p>
+            <b>PROME.</b> PROME improves overall grounding and goal accuracy across all six
+            backbones. Gemma4, the weakest of the larger open-source baselines, gains 23.4 and 34.1
+            percentage points in grounding and goal accuracy, surpassing the other open-source
+            baselines. PROME also improves the strong Gemini models, by 4.5 / 6.1 points on
+            Gemini-2.5-Flash and 4.0 / 6.1 points on Gemini-2.5-Pro in grounding / goal accuracy.
+            Gains on G0 are limited, as these queries can be resolved from speech alone; G1&ndash;G4
+            benefit more, since they require acquiring and integrating additional multimodal
+            evidence.
+          </p>
         </div>
 
         <div class="columns">

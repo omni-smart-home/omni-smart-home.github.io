@@ -486,3 +486,10 @@ video.sample-media {
   vertical-align: -0.35em;
   margin-right: 0.02em;
 }
+
+/* Feasibility notes sit beside the query-type table and match its text size. */
+.feasibility-text {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #555;
+}
