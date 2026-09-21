@@ -1,13 +1,808 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="OmniSmartHome: A Multimodal Reasoning Benchmark for Smart Home LLM Agents. Explore five grounding types and PROME."><meta name="theme-color" content="#ffffff"><title>OmniSmartHome | Multimodal Smart-Home Benchmark</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><script src="script.js" defer></script></head>
-<body><a class="skip" href="#overview">Skip to content</a><header class="nav"><a class="wordmark" href="#top"><span class="mark" aria-hidden="true">⌂</span> OmniSmartHome</a><nav aria-label="Main navigation"><a href="#demos">Demos</a><a href="#overview">Overview</a><a href="#benchmark">Benchmark</a><a href="#prome">PROME</a><a href="#results">Results</a></nav></header>
-<main><section class="hero" id="top"><div class="hero-inner"><p class="eyebrow">MULTIMODAL SMART-HOME BENCHMARK</p><h1>Omni<span>Smart</span>Home</h1><p class="paper-title">A Multimodal Reasoning Benchmark<br>for Smart Home LLM Agents</p><p class="anonymous">Anonymous Authors</p><p class="hero-summary">“Human intent goes beyond words. Smart-home agents should, too.”</p><div class="modality-line"><span>Speech</span><span>Gesture</span><span>Sound</span><span>Space</span><span>Identity</span></div></div></section>
-<section id="demos" class="demo-section"><div class="section-heading"><p class="eyebrow">01 / DEMONSTRATIONS</p><h2>Demo Videos.</h2></div><div class="carousel" role="region" aria-roledescription="carousel" aria-label="Grounding demonstrations" tabindex="0"><div class="track"><article class="slide" id="slide-0" role="group" aria-roledescription="slide" aria-label="1 of 5: Speech"><div class="slide-top"><span class="tag">G0 / SPEECH</span><span>DEMO 01 / 05</span></div><video controls playsinline preload="metadata" poster="assets/images/g0-poster.jpg" aria-label="G0 Speech grounding demonstration"><source src="assets/videos/g0_seg00_think.mp4" type="video/mp4">Your browser does not support video. <a href="assets/videos/g0_seg00_think.mp4">Download G0</a>.</video><div class="slide-caption"><h3>Speech-grounded (G0)</h3><p>The target is resolved from the spoken utterance through correct speech recognition.</p></div></article><article class="slide" id="slide-1" role="group" aria-roledescription="slide" aria-label="2 of 5: Gesture"><div class="slide-top"><span class="tag">G1 / GESTURE</span><span>DEMO 02 / 05</span></div><video controls playsinline preload="none" poster="assets/images/g1-poster.jpg" aria-label="G1 Gesture grounding demonstration"><source src="assets/videos/g1_seg00_think.mp4" type="video/mp4">Your browser does not support video. <a href="assets/videos/g1_seg00_think.mp4">Download G1</a>.</video><div class="slide-caption"><h3>Gesture-grounded (G1)</h3><p>The target is resolved by interpreting the speaker’s gesture in the visual scene.</p></div></article><article class="slide" id="slide-2" role="group" aria-roledescription="slide" aria-label="3 of 5: Sound"><div class="slide-top"><span class="tag">G2 / SOUND</span><span>DEMO 03 / 05</span></div><video controls playsinline preload="none" poster="assets/images/g2-poster.jpg" aria-label="G2 Sound grounding demonstration"><source src="assets/videos/g2_seg00_think.mp4" type="video/mp4">Your browser does not support video. <a href="assets/videos/g2_seg00_think.mp4">Download G2</a>.</video><div class="slide-caption"><h3>Sound-grounded (G2)</h3><p>The target is resolved by detecting and localizing the corresponding device’s sound source.</p></div></article><article class="slide" id="slide-3" role="group" aria-roledescription="slide" aria-label="4 of 5: Space"><div class="slide-top"><span class="tag">G3 / SPACE</span><span>DEMO 04 / 05</span></div><video controls playsinline preload="none" poster="assets/images/g3-poster.jpg" aria-label="G3 Space grounding demonstration"><source src="assets/videos/g3_seg00_think.mp4" type="video/mp4">Your browser does not support video. <a href="assets/videos/g3_seg00_think.mp4">Download G3</a>.</video><div class="slide-caption"><h3>Space-grounded (G3)</h3><p>The target is resolved by reasoning about the speaker’s egocentric direction.</p></div></article><article class="slide" id="slide-4" role="group" aria-roledescription="slide" aria-label="5 of 5: Identity"><div class="slide-top"><span class="tag">G4 / IDENTITY</span><span>DEMO 05 / 05</span></div><video controls playsinline preload="none" poster="assets/images/g4-poster.jpg" aria-label="G4 Identity grounding demonstration"><source src="assets/videos/g4_seg00_think.mp4" type="video/mp4">Your browser does not support video. <a href="assets/videos/g4_seg00_think.mp4">Download G4</a>.</video><div class="slide-caption"><h3>Identity-grounded (G4)</h3><p>The target is resolved by identifying the speaker and interpreting the person-specific reference.</p></div></article></div><div class="carousel-controls"><button class="arrow previous" aria-label="Previous demo" disabled>←</button><div class="selectors" aria-label="Choose a grounding type"><button class="selector" aria-label="Show G0: Speech" aria-controls="slide-0" aria-pressed="true"><b>G0</b><span>Speech</span></button><button class="selector" aria-label="Show G1: Gesture" aria-controls="slide-1" aria-pressed="false"><b>G1</b><span>Gesture</span></button><button class="selector" aria-label="Show G2: Sound" aria-controls="slide-2" aria-pressed="false"><b>G2</b><span>Sound</span></button><button class="selector" aria-label="Show G3: Space" aria-controls="slide-3" aria-pressed="false"><b>G3</b><span>Space</span></button><button class="selector" aria-label="Show G4: Identity" aria-controls="slide-4" aria-pressed="false"><b>G4</b><span>Identity</span></button></div><button class="arrow next" aria-label="Next demo">→</button></div><p class="carousel-help"><span class="counter" aria-live="polite" aria-atomic="true">01 / 05 · Speech</span></p></div></section>
-<section id="overview" class="section"><div class="section-heading"><p class="eyebrow">02 / OVERVIEW</p><h2>OmniSmartHome Overview.</h2><p>OmniSmartHome is a multimodal smart-home benchmark in which fulfilling a user’s instruction requires combining evidence scattered across multiple modalities.</p></div><figure><a href="assets/figures/main.pdf" target="_blank" rel="noopener" aria-label="Open full-size overview figure"><img src="assets/images/overview.webp" width="3200" height="1378" alt="Figure 1: The same air-conditioner request expressed through pointing, humming sounds, egocentric direction, and room ownership." loading="lazy"></a><figcaption><b>Figure 1: OmniSmartHome Overview.</b> In real-world interactions, a user’s command such as &quot;turn off the air conditioner in dad’s room&quot; is often underspecified in language alone, with the intended target resolved from multimodal cues distributed across the surrounding audio-visual context.</figcaption></figure><dl class="grounding-key" aria-label="Five grounding types"><div><dt><span style="background:#e9e9e9">G0</span>Speech</dt><dd>The target is resolved from the spoken utterance through correct speech recognition.</dd></div><div><dt><span style="background:#c8e5ce">G1</span>Gesture</dt><dd>The target is resolved by interpreting the speaker’s gesture in the visual scene.</dd></div><div><dt><span style="background:#f7e4bf">G2</span>Sound</dt><dd>The target is resolved by detecting and localizing the corresponding device’s sound source.</dd></div><div><dt><span style="background:#d8cfeb">G3</span>Space</dt><dd>The target is resolved by reasoning about the speaker’s egocentric direction.</dd></div><div><dt><span style="background:#f5cfca">G4</span>Identity</dt><dd>The target is resolved by identifying the speaker and interpreting the person-specific reference.</dd></div></dl><div class="overview-copy"><h3>Perceive task-relevant information.<br>Aggregate multimodal evidence.</h3><p>OmniSmartHome contains <strong>1,360</strong> synthetic and <strong>272</strong> real-world episodes. Every episode provides visual observations paired with spatial audio, along with textual metadata about rooms, devices, and the home environment. To successfully resolve such requests, an agent must perceive task-relevant information in visual and acoustic observations and aggregate this evidence to infer the user’s intended target device.</p></div></section>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="OmniSmartHome: A Multimodal Reasoning Benchmark for Smart-Home Agents. Explore five grounding types and PROME.">
+  <meta name="keywords" content="OmniSmartHome, Smart Home, Multimodal Benchmark, Agents, PROME">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OmniSmartHome: A Multimodal Reasoning Benchmark for Smart-Home Agents</title>
 
-<section id="benchmark" class="section"><div class="section-heading"><p class="eyebrow">03 / BENCHMARK</p><h2>Benchmark taxonomy.</h2><p>Each episode is characterized by a grounding type, a query type, and a feasibility type.</p></div><div class="stats"><div><strong>1,360</strong><span>Synthetic episodes</span></div><div><strong>272</strong><span>Real-world episodes</span></div><div><strong>5</strong><span>Grounding types</span></div><div><strong>4</strong><span>Query types</span></div></div><div class="two-col taxonomy-layout"><figure class="taxonomy-figure"><a href="assets/figures/benchmark.pdf" target="_blank" rel="noopener"><img src="assets/images/taxonomy.webp" width="3200" height="3200" alt="Figure 2: Taxonomy of OmniSmartHome, showing G0–G4 and their query types." loading="lazy"></a><figcaption><b>Figure 2: Taxonomy of OmniSmartHome.</b> Each episode is characterized by a grounding type, a query type, and a feasibility type.</figcaption></figure><div><h3>What does the user ask?</h3><ul class="query-list"><li><b>Q1</b><span class="query-name">State inquiry</span><small class="query-description">Query the current state or attributes of a device.</small></li><li><b>Q2</b><span class="query-name">Explicit device control</span><small class="query-description">Set a specific device to the requested desired state.</small></li><li><b>Q3</b><span class="query-name">Workflow scheduling</span><small class="query-description">Schedule device actions for a future time or another event.</small></li><li><b>Q4</b><span class="query-name">Implicit intent<span class="query-scope">G0 & G4 only</span></span><small class="query-description">Infer the underlying intent and the appropriate device operation.</small></li></ul></div></div><figure><a href="assets/figures/gen.pdf" target="_blank" rel="noopener"><img src="assets/images/generation.webp" width="3200" height="1249" alt="Figure 3: Scene and viewpoint filtering, target and instruction generation, speech and avatar synthesis, and audio-visual scene composition." loading="lazy"></a><figcaption><b>Figure 3: Synthetic episode generation pipeline.</b> Each synthetic episode is generated through four stages.</figcaption></figure><ol class="generation-steps" aria-label="Synthetic episode generation steps"><li><span class="generation-number">01</span><h4>Scene and viewpoint selection</h4><p>We select HM3D rooms containing suitable home devices and camera viewpoints that provide clear visibility of each room.</p></li><li><span class="generation-number">02</span><h4>Target device and instruction generation</h4><p>We select a target device and goal, then use an LLM to generate the corresponding user instruction query.</p></li><li><span class="generation-number">03</span><h4>Speech and avatar synthesis</h4><p>We render a humanoid avatar with a natural pose and synthesize the user query using text-to-speech (TTS).</p></li><li><span class="generation-number">04</span><h4>Audio-visual scene composition</h4><p>We use SoundSpaces 2.0 to compose the visual scene and spatialize speech and device sounds into a FOA recording.</p></li></ol><div class="benchmark-samples"><div class="samples-heading"><h3>Explore the benchmark</h3></div><div class="carousel sample-carousel" role="region" aria-roledescription="carousel" aria-label="Benchmark samples by grounding type" tabindex="0"><div class="track"><article class="slide sample-slide" id="sample-slide-0" style="--grounding-color:#e9e9e9" role="group" aria-roledescription="slide" aria-label="1 of 5: Speech"><div class="slide-top"><span class="tag">G0 / SPEECH</span><span>4 QUERY TYPES</span></div><section class="sample-domain" aria-label="Speech Synthetic samples"><h4>Synthetic</h4><div class="sample-grid" style="--query-count:4"><article class="sample-card" id="syn-g0-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><a class="sample-image-link" href="assets/samples/syn/g0_q1.png" target="_blank" rel="noopener" aria-label="Open G0 Q1 synthetic image"><img class="sample-media" src="assets/samples/syn/g0_q1.png" width="1024" height="576" alt="G0 Q1 synthetic scene: Hey, can you tell me the, uh, vendor name of the microwave in the, uh, kitchen?" loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g0_q1.wav" id="audio-syn-g0-q1" preload="none" aria-label="syn-g0-q1 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g0-q1" aria-label="Play syn-g0-q1 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Hey, can you tell me the, uh, vendor name of the microwave in the, uh, kitchen?”</p></article><article class="sample-card" id="syn-g0-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><a class="sample-image-link" href="assets/samples/syn/g0_q2.png" target="_blank" rel="noopener" aria-label="Open G0 Q2 synthetic image"><img class="sample-media" src="assets/samples/syn/g0_q2.png" width="1024" height="576" alt="G0 Q2 synthetic scene: Hey, start, start running the dishwasher in the kitchen in the, uh, kitchen now." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g0_q2.wav" id="audio-syn-g0-q2" preload="none" aria-label="syn-g0-q2 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g0-q2" aria-label="Play syn-g0-q2 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Hey, start, start running the dishwasher in the kitchen in the, uh, kitchen now.”</p></article><article class="sample-card" id="syn-g0-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><a class="sample-image-link" href="assets/samples/syn/g0_q3.png" target="_blank" rel="noopener" aria-label="Open G0 Q3 synthetic image"><img class="sample-media" src="assets/samples/syn/g0_q3.png" width="1024" height="576" alt="G0 Q3 synthetic scene: switch the, I mean, schedule the, the audio player in the living room to turn on in 15 minutes, do not turn it on now." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g0_q3.wav" id="audio-syn-g0-q3" preload="none" aria-label="syn-g0-q3 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g0-q3" aria-label="Play syn-g0-q3 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“switch the, I mean, schedule the, the audio player in the living room to turn on in 15 minutes, do not turn it on now.”</p></article><article class="sample-card" id="syn-g0-q4"><div class="sample-query"><span>Q4</span><h5>Implicit intent</h5></div><a class="sample-image-link" href="assets/samples/syn/g0_q4.png" target="_blank" rel="noopener" aria-label="Open G0 Q4 synthetic image"><img class="sample-media" src="assets/samples/syn/g0_q4.png" width="1024" height="576" alt="G0 Q4 synthetic scene: Ugh, the living room feels too bright. My eyes keep squinting and they feel tired after just a few minutes." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g0_q4.wav" id="audio-syn-g0-q4" preload="none" aria-label="syn-g0-q4 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g0-q4" aria-label="Play syn-g0-q4 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Ugh, the living room feels too bright. My eyes keep squinting and they feel tired after just a few minutes.”</p></article></div></section><section class="sample-domain" aria-label="Speech Real-world samples"><h4>Real-world</h4><div class="sample-grid" style="--query-count:4"><article class="sample-card" id="real-g0-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><div class="sample-video"><video src="assets/samples/real/g0_q1.mp4" poster="assets/samples/real/g0_q1-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g0-q1 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“What&#x27;s the current level of the dimmable light in the living room?”</p></article><article class="sample-card" id="real-g0-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><div class="sample-video"><video src="assets/samples/real/g0_q2.mp4" poster="assets/samples/real/g0_q2-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g0-q2 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“Please turn on the light in here.”</p></article><article class="sample-card" id="real-g0-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><div class="sample-video"><video src="assets/samples/real/g0_q3.mp4" poster="assets/samples/real/g0_q3-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g0-q3 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“in 5 minutes, Turn on the microwave in the kitchen and get it running.”</p></article><article class="sample-card" id="real-g0-q4"><div class="sample-query"><span>Q4</span><h5>Implicit intent</h5></div><div class="sample-video"><video src="assets/samples/real/g0_q4.mp4" poster="assets/samples/real/g0_q4-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g0-q4 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“The air in the kitchen feels kinda dusty.”</p></article></div></section></article><article class="slide sample-slide" id="sample-slide-1" style="--grounding-color:#c8e5ce" role="group" aria-roledescription="slide" aria-label="2 of 5: Gesture"><div class="slide-top"><span class="tag">G1 / GESTURE</span><span>3 QUERY TYPES</span></div><section class="sample-domain" aria-label="Gesture Synthetic samples"><h4>Synthetic</h4><div class="sample-grid" style="--query-count:3"><article class="sample-card" id="syn-g1-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><a class="sample-image-link" href="assets/samples/syn/g1_q1.png" target="_blank" rel="noopener" aria-label="Open G1 Q1 synthetic image"><img class="sample-media" src="assets/samples/syn/g1_q1.png" width="1024" height="576" alt="G1 Q1 synthetic scene: What level is this at right now?" loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g1_q1.wav" id="audio-syn-g1-q1" preload="none" aria-label="syn-g1-q1 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g1-q1" aria-label="Play syn-g1-q1 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“What level is this at right now?”</p></article><article class="sample-card" id="syn-g1-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><a class="sample-image-link" href="assets/samples/syn/g1_q2.png" target="_blank" rel="noopener" aria-label="Open G1 Q2 synthetic image"><img class="sample-media" src="assets/samples/syn/g1_q2.png" width="1024" height="576" alt="G1 Q2 synthetic scene: Turn this on, set this to quick normal, and start this running." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g1_q2.wav" id="audio-syn-g1-q2" preload="none" aria-label="syn-g1-q2 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g1-q2" aria-label="Play syn-g1-q2 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Turn this on, set this to quick normal, and start this running.”</p></article><article class="sample-card" id="syn-g1-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><a class="sample-image-link" href="assets/samples/syn/g1_q3.png" target="_blank" rel="noopener" aria-label="Open G1 Q3 synthetic image"><img class="sample-media" src="assets/samples/syn/g1_q3.png" width="1024" height="576" alt="G1 Q3 synthetic scene: In nine minutes, switch this to KBS2." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g1_q3.wav" id="audio-syn-g1-q3" preload="none" aria-label="syn-g1-q3 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g1-q3" aria-label="Play syn-g1-q3 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“In nine minutes, switch this to KBS2.”</p></article></div></section><section class="sample-domain" aria-label="Gesture Real-world samples"><h4>Real-world</h4><div class="sample-grid" style="--query-count:3"><article class="sample-card" id="real-g1-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><div class="sample-video"><video src="assets/samples/real/g1_q1.mp4" poster="assets/samples/real/g1_q1-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g1-q1 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“What’s the product name of that?”</p></article><article class="sample-card" id="real-g1-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><div class="sample-video"><video src="assets/samples/real/g1_q2.mp4" poster="assets/samples/real/g1_q2-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g1-q2 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“Turn that on and set it to cooling mode.”</p></article><article class="sample-card" id="real-g1-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><div class="sample-video"><video src="assets/samples/real/g1_q3.mp4" poster="assets/samples/real/g1_q3-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g1-q3 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“In 10 minutes, power this on.”</p></article></div></section></article><article class="slide sample-slide" id="sample-slide-2" style="--grounding-color:#f7e4bf" role="group" aria-roledescription="slide" aria-label="3 of 5: Sound"><div class="slide-top"><span class="tag">G2 / SOUND</span><span>3 QUERY TYPES</span></div><section class="sample-domain" aria-label="Sound Synthetic samples"><h4>Synthetic</h4><div class="sample-grid" style="--query-count:3"><article class="sample-card" id="syn-g2-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><a class="sample-image-link" href="assets/samples/syn/g2_q1.png" target="_blank" rel="noopener" aria-label="Open G2 Q1 synthetic image"><img class="sample-media" src="assets/samples/syn/g2_q1.png" width="1024" height="576" alt="G2 Q1 synthetic scene: Hey, how much time is left on that device making electronic music?" loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g2_q1.wav" id="audio-syn-g2-q1" preload="none" aria-label="syn-g2-q1 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g2-q1" aria-label="Play syn-g2-q1 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Hey, how much time is left on that device making electronic music?”</p></article><article class="sample-card" id="syn-g2-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><a class="sample-image-link" href="assets/samples/syn/g2_q2.png" target="_blank" rel="noopener" aria-label="Open G2 Q2 synthetic image"><img class="sample-media" src="assets/samples/syn/g2_q2.png" width="1024" height="576" alt="G2 Q2 synthetic scene: Silence the device making the alarm beeps now" loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g2_q2.wav" id="audio-syn-g2-q2" preload="none" aria-label="syn-g2-q2 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g2-q2" aria-label="Play syn-g2-q2 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Silence the device making the alarm beeps now”</p></article><article class="sample-card" id="syn-g2-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><a class="sample-image-link" href="assets/samples/syn/g2_q3.png" target="_blank" rel="noopener" aria-label="Open G2 Q3 synthetic image"><img class="sample-media" src="assets/samples/syn/g2_q3.png" width="1024" height="576" alt="G2 Q3 synthetic scene: Schedule setting the volume of the device that is playing that music to 10 percent in 27 minutes and do not set it now." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g2_q3.wav" id="audio-syn-g2-q3" preload="none" aria-label="syn-g2-q3 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g2-q3" aria-label="Play syn-g2-q3 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Schedule setting the volume of the device that is playing that music to 10 percent in 27 minutes and do not set it now.”</p></article></div></section><section class="sample-domain" aria-label="Sound Real-world samples"><h4>Real-world</h4><div class="sample-grid" style="--query-count:3"><article class="sample-card" id="real-g2-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><div class="sample-video"><video src="assets/samples/real/g2_q1.mp4" poster="assets/samples/real/g2_q1-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g2-q1 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“What’s the product name of the device making that beeping sound?”</p></article><article class="sample-card" id="real-g2-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><div class="sample-video"><video src="assets/samples/real/g2_q2.mp4" poster="assets/samples/real/g2_q2-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g2-q2 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“Hey, the device making the sharp alarm beeps, silence it now”</p></article><article class="sample-card" id="real-g2-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><div class="sample-video"><video src="assets/samples/real/g2_q3.mp4" poster="assets/samples/real/g2_q3-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g2-q3 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“in 5 minutes, Stop the device making that melodic chime now so it is no longer running”</p></article></div></section></article><article class="slide sample-slide" id="sample-slide-3" style="--grounding-color:#d8cfeb" role="group" aria-roledescription="slide" aria-label="4 of 5: Space"><div class="slide-top"><span class="tag">G3 / SPACE</span><span>3 QUERY TYPES</span></div><section class="sample-domain" aria-label="Space Synthetic samples"><h4>Synthetic</h4><div class="sample-grid" style="--query-count:3"><article class="sample-card" id="syn-g3-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><a class="sample-image-link" href="assets/samples/syn/g3_q1.png" target="_blank" rel="noopener" aria-label="Open G3 Q1 synthetic image"><img class="sample-media" src="assets/samples/syn/g3_q1.png" width="1024" height="576" alt="G3 Q1 synthetic scene: Can you tell me the vendor name of the device making the sound on my right?" loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g3_q1.wav" id="audio-syn-g3-q1" preload="none" aria-label="syn-g3-q1 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g3-q1" aria-label="Play syn-g3-q1 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Can you tell me the vendor name of the device making the sound on my right?”</p></article><article class="sample-card" id="syn-g3-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><a class="sample-image-link" href="assets/samples/syn/g3_q2.png" target="_blank" rel="noopener" aria-label="Open G3 Q2 synthetic image"><img class="sample-media" src="assets/samples/syn/g3_q2.png" width="1024" height="576" alt="G3 Q2 synthetic scene: Stop the device making that sound on my right and a little lower down so it is no longer running." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g3_q2.wav" id="audio-syn-g3-q2" preload="none" aria-label="syn-g3-q2 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g3-q2" aria-label="Play syn-g3-q2 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Stop the device making that sound on my right and a little lower down so it is no longer running.”</p></article><article class="sample-card" id="syn-g3-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><a class="sample-image-link" href="assets/samples/syn/g3_q3.png" target="_blank" rel="noopener" aria-label="Open G3 Q3 synthetic image"><img class="sample-media" src="assets/samples/syn/g3_q3.png" width="1024" height="576" alt="G3 Q3 synthetic scene: Schedule the one in front of me to turn on in 11 minutes and do not turn it on now." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g3_q3.wav" id="audio-syn-g3-q3" preload="none" aria-label="syn-g3-q3 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g3-q3" aria-label="Play syn-g3-q3 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Schedule the one in front of me to turn on in 11 minutes and do not turn it on now.”</p></article></div></section><section class="sample-domain" aria-label="Space Real-world samples"><h4>Real-world</h4><div class="sample-grid" style="--query-count:3"><article class="sample-card" id="real-g3-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><div class="sample-video"><video src="assets/samples/real/g3_q1.mp4" poster="assets/samples/real/g3_q1-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g3-q1 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“What’s the vendor name of the device making that sound on my left ?”</p></article><article class="sample-card" id="real-g3-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><div class="sample-video"><video src="assets/samples/real/g3_q2.mp4" poster="assets/samples/real/g3_q2-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g3-q2 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“Hey, turn off the device in front of me.”</p></article><article class="sample-card" id="real-g3-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><div class="sample-video"><video src="assets/samples/real/g3_q3.mp4" poster="assets/samples/real/g3_q3-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g3-q3 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“In 5 minutes, turn the device on my left on, set it to delicate mode and have it running.”</p></article></div></section></article><article class="slide sample-slide" id="sample-slide-4" style="--grounding-color:#f5cfca" role="group" aria-roledescription="slide" aria-label="5 of 5: Identity"><div class="slide-top"><span class="tag">G4 / IDENTITY</span><span>4 QUERY TYPES</span></div><section class="sample-domain" aria-label="Identity Synthetic samples"><h4>Synthetic</h4><div class="sample-grid" style="--query-count:4"><article class="sample-card" id="syn-g4-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><a class="sample-image-link" href="assets/samples/syn/g4_q1.png" target="_blank" rel="noopener" aria-label="Open G4 Q1 synthetic image"><img class="sample-media" src="assets/samples/syn/g4_q1.png" width="1024" height="576" alt="G4 Q1 synthetic scene: Which robot-vacuum phases does the RVC in my room support?" loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g4_q1.wav" id="audio-syn-g4-q1" preload="none" aria-label="syn-g4-q1 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g4-q1" aria-label="Play syn-g4-q1 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Which robot-vacuum phases does the RVC in my room support?”</p></article><article class="sample-card" id="syn-g4-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><a class="sample-image-link" href="assets/samples/syn/g4_q2.png" target="_blank" rel="noopener" aria-label="Open G4 Q2 synthetic image"><img class="sample-media" src="assets/samples/syn/g4_q2.png" width="1024" height="576" alt="G4 Q2 synthetic scene: Turn on the air conditioner in my room, set it to cooling and the fan to fifty percent." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g4_q2.wav" id="audio-syn-g4-q2" preload="none" aria-label="syn-g4-q2 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g4-q2" aria-label="Play syn-g4-q2 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Turn on the air conditioner in my room, set it to cooling and the fan to fifty percent.”</p></article><article class="sample-card" id="syn-g4-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><a class="sample-image-link" href="assets/samples/syn/g4_q3.png" target="_blank" rel="noopener" aria-label="Open G4 Q3 synthetic image"><img class="sample-media" src="assets/samples/syn/g4_q3.png" width="1024" height="576" alt="G4 Q3 synthetic scene: Before I head out, power off the microwave in my room exactly 19 minutes before dishwasher in the home office finishes cleaning." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g4_q3.wav" id="audio-syn-g4-q3" preload="none" aria-label="syn-g4-q3 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g4-q3" aria-label="Play syn-g4-q3 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“Before I head out, power off the microwave in my room exactly 19 minutes before dishwasher in the home office finishes cleaning.”</p></article><article class="sample-card" id="syn-g4-q4"><div class="sample-query"><span>Q4</span><h5>Implicit intent</h5></div><a class="sample-image-link" href="assets/samples/syn/g4_q4.png" target="_blank" rel="noopener" aria-label="Open G4 Q4 synthetic image"><img class="sample-media" src="assets/samples/syn/g4_q4.png" width="1024" height="576" alt="G4 Q4 synthetic scene: My room is too bright." loading="lazy"></a><div class="sample-audio"><audio src="assets/samples/syn/g4_q4.wav" id="audio-syn-g4-q4" preload="none" aria-label="syn-g4-q4 audio"></audio><button class="audio-toggle" type="button" aria-controls="audio-syn-g4-q4" aria-label="Play syn-g4-q4 audio"><span class="audio-icon" aria-hidden="true">▶</span><span class="audio-label">Play audio</span></button><span class="audio-status" role="status"></span></div><p class="sample-transcript">“My room is too bright.”</p></article></div></section><section class="sample-domain" aria-label="Identity Real-world samples"><h4>Real-world</h4><div class="sample-grid" style="--query-count:4"><article class="sample-card" id="real-g4-q1"><div class="sample-query"><span>Q1</span><h5>State inquiry</h5></div><div class="sample-video"><video src="assets/samples/real/g4_q1.mp4" poster="assets/samples/real/g4_q1-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g4-q1 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“What&#x27;s the vendor ID of the AC in my room?”</p></article><article class="sample-card" id="real-g4-q2"><div class="sample-query"><span>Q2</span><h5>Explicit device control</h5></div><div class="sample-video"><video src="assets/samples/real/g4_q2.mp4" poster="assets/samples/real/g4_q2-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g4-q2 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“Turn off the humidifier in my room now.”</p></article><article class="sample-card" id="real-g4-q3"><div class="sample-query"><span>Q3</span><h5>Workflow scheduling</h5></div><div class="sample-video"><video src="assets/samples/real/g4_q3.mp4" poster="assets/samples/real/g4_q3-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g4-q3 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“In 10 minutes, turn on the dimmer light in my room and set it to 90 percent.”</p></article><article class="sample-card" id="real-g4-q4"><div class="sample-query"><span>Q4</span><h5>Implicit intent</h5></div><div class="sample-video"><video src="assets/samples/real/g4_q4.mp4" poster="assets/samples/real/g4_q4-poster.jpg" class="sample-media" controls playsinline preload="none" aria-label="real-g4-q4 real-world video"></video><span class="video-pending" hidden></span></div><p class="sample-transcript">“The air feels kind of dusty and my throat is a bit scratchy in my room.”</p></article></div></section></article></div><div class="carousel-controls"><button class="arrow previous" aria-label="Previous sample group" disabled>←</button><div class="selectors" aria-label="Choose a sample grounding type"><button class="selector" aria-label="Show Speech benchmark samples" aria-controls="sample-slide-0" aria-pressed="true"><b>G0</b><span>Speech</span></button><button class="selector" aria-label="Show Gesture benchmark samples" aria-controls="sample-slide-1" aria-pressed="false"><b>G1</b><span>Gesture</span></button><button class="selector" aria-label="Show Sound benchmark samples" aria-controls="sample-slide-2" aria-pressed="false"><b>G2</b><span>Sound</span></button><button class="selector" aria-label="Show Space benchmark samples" aria-controls="sample-slide-3" aria-pressed="false"><b>G3</b><span>Space</span></button><button class="selector" aria-label="Show Identity benchmark samples" aria-controls="sample-slide-4" aria-pressed="false"><b>G4</b><span>Identity</span></button></div><button class="arrow next" aria-label="Next sample group">→</button></div><p class="carousel-help"><span class="counter" aria-live="polite" aria-atomic="true">01 / 05 · Speech</span></p></div></div></section>
-<section id="prome" class="prome-section"><div class="section"><div class="section-heading"><p class="eyebrow">04 / METHOD</p><h2>Meet <span class="accent">PROME.</span></h2><p><b>PRO</b>cedural <b>M</b>emory for multimodal <b>E</b>vidence gathering.<br>A lightweight agentic baseline for adaptive evidence acquisition.</p></div><div class="prome-intro"><h3>Multimodal evidence gathering</h3><p>PROME equips the agent with a set of <strong>multimodal perception tools</strong> and augments its reasoning with <strong>procedural memory</strong> that captures reusable strategies for resolving grounding ambiguities.</p><p>The perception tools extract audio, visual, and spatial evidence through speech recognition, sound localization, pointing, and identity matching. The procedural memory guides tool invocation and the integration of tool outputs.</p></div><figure><a href="assets/figures/agent.pdf" target="_blank" rel="noopener"><img src="assets/images/prome.webp" width="3200" height="967" alt="Figure 4: PROME adds perception tools, a schema selector, a state tracker, and procedural memory to the baseline ReAct agent loop." loading="lazy"></a><figcaption><b>Figure 4: Illustration of the agentic framework.</b> The baseline excludes the components highlighted in orange, while PROME incorporates them. The figure visualizes the roles and interactions of the episode components (E1–E4), simulator, tools, and evaluation.</figcaption></figure><div class="prome-phase"><div class="phase-heading"><span class="phase-label">TRAINING</span><h3>Procedural memory construction</h3><p>For memory construction, we use 680 synthetic training episodes from the HM3D training split.</p></div><ol class="method-stages"><li><span class="stage-number">01</span><h4>Construct the keys</h4><p>We prompt an Omni-LLM to group training episodes by grounding ambiguity type and generate a natural-language description for each group as its retrieval key.</p></li><li><span class="stage-number">02</span><h4>Initialize the policy logits</h4><p>We initialize the policy logits using a hand-specified cost prior and per-tool bonuses estimated by comparing reference rollouts with and without perception tools.</p></li><li><span class="stage-number">03</span><h4>Single policy-gradient update</h4><p>We add a memory-guided rollout and refine the policy using episode-level grounding rewards, applying a single policy-gradient update after rolling out the training set once.</p></li></ol></div>
-<div class="prome-phase"><div class="phase-heading"><span class="phase-label">INFERENCE</span><h3>Step-wise guidance for evidence acquisition</h3><p>The policy selects the next tool action conditioned on the agent’s current grounding state. The state summarizes the evidence acquired thus far and the remaining uncertainty.</p></div><ol class="method-stages"><li><span class="stage-number">01</span><h4>Retrieve the grounding schema</h4><p>At the beginning of each episode, the agent uses the multimodal input to retrieve the most relevant grounding schema from the procedural memory bank.</p></li><li><span class="stage-number">02</span><h4>Update the grounding state</h4><p>After each ReAct step, the agent updates its grounding state, samples the next tool action, and injects a brief <strong>[GROUNDING HINT]</strong> before the next reasoning step.</p></li><li><span class="stage-number">03</span><h4>Declare the target and finish</h4><p>The agent calls <strong>Device Declare</strong> to record the inferred target device, then calls <strong>Finish</strong> to terminate the episode and return the final textual response.</p></li></ol></div>
-</div></section>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
 
-<section id="results" class="section"><div class="section-heading"><p class="eyebrow">05 / RESULTS</p><h2>Main results</h2><p>PROME improves overall grounding and goal accuracy across all six backbones.</p></div><div class="result-callouts"><div><strong>+7.3 <small>pp</small></strong><p>Mean grounding accuracy gain</p></div><div><strong>+10.2 <small>pp</small></strong><p>Mean goal accuracy gain</p></div><div><strong>6 / 6</strong><p>Backbones with gains in both metrics</p></div></div><div class="table-wrap" tabindex="0" role="region" aria-label="Results table, scroll horizontally on small screens"><table><caption>Overall accuracy (%) · Table 2 in the paper</caption><colgroup><col style="width:28%"><col style="width:18%"><col style="width:18%"><col style="width:18%"><col style="width:18%"></colgroup><thead><tr><th scope="col" rowspan="2">Backbone</th><th scope="colgroup" colspan="2">Grounding accuracy ↑</th><th scope="colgroup" colspan="2">Goal accuracy ↑</th></tr><tr><th scope="col">Baseline</th><th scope="col">+ PROME</th><th scope="col">Baseline</th><th scope="col">+ PROME</th></tr></thead><tbody><tr><th scope="row">Qwen2.5-Omni</th><td>33.0</td><td class="highlight">38.2 <small>+5.2</small></td><td>17.6</td><td class="highlight">22.4 <small>+4.8</small></td></tr><tr><th scope="row">Gemma4</th><td>50.6</td><td class="highlight">74.0 <small>+23.4</small></td><td>25.2</td><td class="highlight">59.3 <small>+34.1</small></td></tr><tr><th scope="row">Nemotron3</th><td>62.7</td><td class="highlight">65.2 <small>+2.5</small></td><td>44.5</td><td class="highlight">49.1 <small>+4.6</small></td></tr><tr><th scope="row">Qwen3-Omni-Think</th><td>65.9</td><td class="highlight">70.2 <small>+4.3</small></td><td>48.4</td><td class="highlight">53.9 <small>+5.5</small></td></tr><tr><th scope="row">Gemini-2.5-Flash</th><td>73.7</td><td class="highlight">78.2 <small>+4.5</small></td><td>56.2</td><td class="highlight">62.3 <small>+6.1</small></td></tr><tr><th scope="row">Gemini-2.5-Pro</th><td>81.0</td><td class="highlight">85.0 <small>+4.0</small></td><td>63.1</td><td class="highlight">69.2 <small>+6.1</small></td></tr></tbody></table></div><div class="two-col metrics"><div><h3>Grounding accuracy</h3><p>Grounding accuracy measures whether the declared device matches the ground-truth target. For infeasible queries where the target device does not exist, the agent is expected to declare no target.</p></div><div><h3>Goal accuracy</h3><p>Goal accuracy measures whether the agent satisfies the requested goal. Feasible Q2–Q4 queries are evaluated using the final simulator state; Q1 and infeasible queries are evaluated using an LLM-as-a-judge.</p></div></div></section></main><footer><a class="wordmark" href="#top">OmniSmartHome <span aria-hidden="true">↑</span></a><span>Anonymous Authors</span></footer></body></html>
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="#top">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+      <a class="navbar-item" href="#demos">Demos</a>
+      <a class="navbar-item" href="#overview">Overview</a>
+      <a class="navbar-item" href="#benchmark">Benchmark</a>
+      <a class="navbar-item" href="#prome">Simple agentic baseline</a>
+      <a class="navbar-item" href="#results">Results</a>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><img src="./icon.png" class="title-icon" alt="">OmniSmartHome: A Multimodal Reasoning<br>Benchmark for Smart-Home Agents</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous Authors</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://drive.google.com/drive/folders/1VgDksji78LF1RIZvIdaNhLCxJwkq6Isi?usp=sharing"
+                   class="external-link button is-normal is-rounded is-dark"
+                   target="_blank" rel="noopener">
+                  <span class="icon">
+                      <i class="fas fa-database"></i>
+                  </span>
+                  <span>Synthetic data</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <a href="./assets/figures/main.pdf" target="_blank" rel="noopener">
+        <img src="./assets/images/overview.webp" width="3200" height="1378"
+             alt="Figure 1: The same air-conditioner request expressed through pointing, humming sounds, egocentric direction, and room ownership.">
+      </a>
+      <p class="figure-caption has-text-centered">
+        <b>Figure 1: OmniSmartHome Overview.</b> In real-world interactions, a user&rsquo;s command such as
+        &quot;turn off the air conditioner in dad&rsquo;s room&quot; is often underspecified in language alone,
+        with the intended target resolved from multimodal cues distributed across the surrounding
+        audio-visual context.
+      </p>
+      <h2 class="subtitle has-text-centered">
+        &ldquo;Human intent goes beyond words. Smart-home agents should, too.&rdquo;
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small" id="demos">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Demo Videos</h2>
+      <div id="demo-carousel" class="carousel results-carousel">
+      <div class="item">
+        <video poster="./assets/images/g0-poster.jpg" id="demo-g0" controls playsinline preload="metadata" height="100%">
+          <source src="./assets/videos/g0_seg00_think.mp4" type="video/mp4">
+        </video>
+        <div class="item-caption has-text-centered">
+          <h3 class="title is-5"><span class="tag grounding-tag" style="background-color: #e9e9e9">G0</span> Speech-grounded</h3>
+          <p>The target is resolved from the spoken utterance through correct speech recognition.</p>
+        </div>
+      </div>
+      <div class="item">
+        <video poster="./assets/images/g1-poster.jpg" id="demo-g1" controls playsinline preload="none" height="100%">
+          <source src="./assets/videos/g1_seg00_think.mp4" type="video/mp4">
+        </video>
+        <div class="item-caption has-text-centered">
+          <h3 class="title is-5"><span class="tag grounding-tag" style="background-color: #c8e5ce">G1</span> Gesture-grounded</h3>
+          <p>The target is resolved by interpreting the speaker&rsquo;s gesture in the visual scene.</p>
+        </div>
+      </div>
+      <div class="item">
+        <video poster="./assets/images/g2-poster.jpg" id="demo-g2" controls playsinline preload="none" height="100%">
+          <source src="./assets/videos/g2_seg00_think.mp4" type="video/mp4">
+        </video>
+        <div class="item-caption has-text-centered">
+          <h3 class="title is-5"><span class="tag grounding-tag" style="background-color: #f7e4bf">G2</span> Sound-grounded</h3>
+          <p>The target is resolved by detecting and localizing the corresponding device&rsquo;s sound source.</p>
+        </div>
+      </div>
+      <div class="item">
+        <video poster="./assets/images/g3-poster.jpg" id="demo-g3" controls playsinline preload="none" height="100%">
+          <source src="./assets/videos/g3_seg00_think.mp4" type="video/mp4">
+        </video>
+        <div class="item-caption has-text-centered">
+          <h3 class="title is-5"><span class="tag grounding-tag" style="background-color: #d8cfeb">G3</span> Space-grounded</h3>
+          <p>The target is resolved by reasoning about the speaker&rsquo;s egocentric direction.</p>
+        </div>
+      </div>
+      <div class="item">
+        <video poster="./assets/images/g4-poster.jpg" id="demo-g4" controls playsinline preload="none" height="100%">
+          <source src="./assets/videos/g4_seg00_think.mp4" type="video/mp4">
+        </video>
+        <div class="item-caption has-text-centered">
+          <h3 class="title is-5"><span class="tag grounding-tag" style="background-color: #f5cfca">G4</span> Identity-grounded</h3>
+          <p>The target is resolved by identifying the speaker and interpreting the person-specific reference.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="overview">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            OmniSmartHome is a multimodal smart-home benchmark in which fulfilling a user&rsquo;s
+            instruction requires combining evidence scattered across multiple modalities.
+          </p>
+          <p>
+            OmniSmartHome contains <b>1,360</b> synthetic and <b>272</b> real-world episodes. Every
+            episode provides visual observations paired with spatial audio, along with textual
+            metadata about rooms, devices, and the home environment. To successfully resolve such
+            requests, an agent must perceive task-relevant information in visual and acoustic
+            observations and aggregate this evidence to infer the user&rsquo;s intended target device.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="benchmark">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Benchmark</h2>
+        <div class="content has-text-justified">
+          <p>
+            Each episode is characterized by a grounding type, a query type, and a feasibility type.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered stats">
+      <div class="column">
+        <p class="title is-2">1,360</p>
+        <p class="subtitle is-6">Synthetic episodes</p>
+      </div>
+      <div class="column">
+        <p class="title is-2">272</p>
+        <p class="subtitle is-6">Real-world episodes</p>
+      </div>
+      <div class="column">
+        <p class="title is-2">5</p>
+        <p class="subtitle is-6">Grounding types</p>
+      </div>
+      <div class="column">
+        <p class="title is-2">4</p>
+        <p class="subtitle is-6">Query types</p>
+      </div>
+      <div class="column">
+        <p class="title is-2">2</p>
+        <p class="subtitle is-6">Feasibility types</p>
+      </div>
+    </div>
+
+    <div class="columns is-centered is-vcentered">
+      <div class="column is-half has-text-centered taxonomy-figure">
+        <a href="./assets/figures/benchmark.pdf" target="_blank" rel="noopener">
+          <img src="./assets/images/taxonomy.webp" width="3200" height="3200"
+               alt="Figure 2: Taxonomy of OmniSmartHome, showing G0-G4 and their query types."
+               loading="lazy">
+        </a>
+        <p class="figure-caption">
+          <b>Figure 2: Taxonomy of OmniSmartHome.</b> Each episode is characterized by a grounding
+          type, a query type, and a feasibility type.
+        </p>
+      </div>
+      <div class="column">
+        <h3 class="title is-4">Five grounding types</h3>
+        <table class="table is-fullwidth query-list grounding-list">
+          <tbody>
+            <tr>
+              <td><span class="tag grounding-tag" style="background-color: #e9e9e9">G0</span></td>
+              <td>Speech</td>
+              <td class="query-description">The target is resolved from the spoken utterance through correct speech recognition.</td>
+            </tr>
+            <tr>
+              <td><span class="tag grounding-tag" style="background-color: #c8e5ce">G1</span></td>
+              <td>Gesture</td>
+              <td class="query-description">The target is resolved by interpreting the speaker&rsquo;s gesture in the visual scene.</td>
+            </tr>
+            <tr>
+              <td><span class="tag grounding-tag" style="background-color: #f7e4bf">G2</span></td>
+              <td>Sound</td>
+              <td class="query-description">The target is resolved by detecting and localizing the corresponding device&rsquo;s sound source.</td>
+            </tr>
+            <tr>
+              <td><span class="tag grounding-tag" style="background-color: #d8cfeb">G3</span></td>
+              <td>Space</td>
+              <td class="query-description">The target is resolved by reasoning about the speaker&rsquo;s egocentric direction.</td>
+            </tr>
+            <tr>
+              <td><span class="tag grounding-tag" style="background-color: #f5cfca">G4</span></td>
+              <td>Identity</td>
+              <td class="query-description">The target is resolved by identifying the speaker and interpreting the person-specific reference.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small" id="samples">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Benchmark samples</h2>
+      <div id="sample-carousel" class="carousel sample-carousel">
+      <div class="item">
+        <div class="sample-header">
+          <span class="tag grounding-tag" style="background-color: #e9e9e9">G0</span>
+          <span class="sample-header-title">Speech</span>
+          <span class="sample-header-meta">4 query types</span>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Synthetic</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <a href="./assets/samples/syn/g0_q1.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g0_q1.png" class="sample-media" alt="G0 Q1 synthetic scene: Hey, can you tell me the, uh, vendor name of the microwave in the, uh, kitchen?" loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G0 Q1 synthetic speech">
+            <source src="./assets/samples/syn/g0_q1.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Hey, can you tell me the, uh, vendor name of the microwave in the, uh, kitchen?&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <a href="./assets/samples/syn/g0_q2.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g0_q2.png" class="sample-media" alt="G0 Q2 synthetic scene: Hey, start, start running the dishwasher in the kitchen in the, uh, kitchen now." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G0 Q2 synthetic speech">
+            <source src="./assets/samples/syn/g0_q2.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Hey, start, start running the dishwasher in the kitchen in the, uh, kitchen now.&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <a href="./assets/samples/syn/g0_q3.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g0_q3.png" class="sample-media" alt="G0 Q3 synthetic scene: switch the, I mean, schedule the, the audio player in the living room to turn on in 15 minutes, do not turn it on now." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G0 Q3 synthetic speech">
+            <source src="./assets/samples/syn/g0_q3.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;switch the, I mean, schedule the, the audio player in the living room to turn on in 15 minutes, do not turn it on now.&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q4</b> Implicit intent</p>
+          <a href="./assets/samples/syn/g0_q4.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g0_q4.png" class="sample-media" alt="G0 Q4 synthetic scene: Ugh, the living room feels too bright. My eyes keep squinting and they feel tired after just a few minutes." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G0 Q4 synthetic speech">
+            <source src="./assets/samples/syn/g0_q4.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Ugh, the living room feels too bright. My eyes keep squinting and they feel tired after just a few minutes.&rdquo;</p>
+        </div>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Real-world</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g0_q1-poster.jpg"
+                 aria-label="G0 Q1 real-world sample">
+            <source src="./assets/samples/real/g0_q1.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;What's the current level of the dimmable light in the living room?&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g0_q2-poster.jpg"
+                 aria-label="G0 Q2 real-world sample">
+            <source src="./assets/samples/real/g0_q2.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;Please turn on the light in here.&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g0_q3-poster.jpg"
+                 aria-label="G0 Q3 real-world sample">
+            <source src="./assets/samples/real/g0_q3.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;in 5 minutes, Turn on the microwave in the kitchen and get it running.&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q4</b> Implicit intent</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g0_q4-poster.jpg"
+                 aria-label="G0 Q4 real-world sample">
+            <source src="./assets/samples/real/g0_q4.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;The air in the kitchen feels kinda dusty.&rdquo;</p>
+        </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="sample-header">
+          <span class="tag grounding-tag" style="background-color: #c8e5ce">G1</span>
+          <span class="sample-header-title">Gesture</span>
+          <span class="sample-header-meta">3 query types</span>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Synthetic</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <a href="./assets/samples/syn/g1_q1.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g1_q1.png" class="sample-media" alt="G1 Q1 synthetic scene: What level is this at right now?" loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G1 Q1 synthetic speech">
+            <source src="./assets/samples/syn/g1_q1.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;What level is this at right now?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <a href="./assets/samples/syn/g1_q2.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g1_q2.png" class="sample-media" alt="G1 Q2 synthetic scene: Turn this on, set this to quick normal, and start this running." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G1 Q2 synthetic speech">
+            <source src="./assets/samples/syn/g1_q2.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Turn this on, set this to quick normal, and start this running.&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <a href="./assets/samples/syn/g1_q3.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g1_q3.png" class="sample-media" alt="G1 Q3 synthetic scene: In nine minutes, switch this to KBS2." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G1 Q3 synthetic speech">
+            <source src="./assets/samples/syn/g1_q3.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;In nine minutes, switch this to KBS2.&rdquo;</p>
+        </div>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Real-world</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g1_q1-poster.jpg"
+                 aria-label="G1 Q1 real-world sample">
+            <source src="./assets/samples/real/g1_q1.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;What’s the product name of that?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g1_q2-poster.jpg"
+                 aria-label="G1 Q2 real-world sample">
+            <source src="./assets/samples/real/g1_q2.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;Turn that on and set it to cooling mode.&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g1_q3-poster.jpg"
+                 aria-label="G1 Q3 real-world sample">
+            <source src="./assets/samples/real/g1_q3.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;In 10 minutes, power this on.&rdquo;</p>
+        </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="sample-header">
+          <span class="tag grounding-tag" style="background-color: #f7e4bf">G2</span>
+          <span class="sample-header-title">Sound</span>
+          <span class="sample-header-meta">3 query types</span>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Synthetic</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <a href="./assets/samples/syn/g2_q1.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g2_q1.png" class="sample-media" alt="G2 Q1 synthetic scene: Hey, how much time is left on that device making electronic music?" loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G2 Q1 synthetic speech">
+            <source src="./assets/samples/syn/g2_q1.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Hey, how much time is left on that device making electronic music?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <a href="./assets/samples/syn/g2_q2.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g2_q2.png" class="sample-media" alt="G2 Q2 synthetic scene: Silence the device making the alarm beeps now" loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G2 Q2 synthetic speech">
+            <source src="./assets/samples/syn/g2_q2.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Silence the device making the alarm beeps now&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <a href="./assets/samples/syn/g2_q3.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g2_q3.png" class="sample-media" alt="G2 Q3 synthetic scene: Schedule setting the volume of the device that is playing that music to 10 percent in 27 minutes and do not set it now." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G2 Q3 synthetic speech">
+            <source src="./assets/samples/syn/g2_q3.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Schedule setting the volume of the device that is playing that music to 10 percent in 27 minutes and do not set it now.&rdquo;</p>
+        </div>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Real-world</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g2_q1-poster.jpg"
+                 aria-label="G2 Q1 real-world sample">
+            <source src="./assets/samples/real/g2_q1.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;What’s the product name of the device making that beeping sound?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g2_q2-poster.jpg"
+                 aria-label="G2 Q2 real-world sample">
+            <source src="./assets/samples/real/g2_q2.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;Hey, the device making the sharp alarm beeps, silence it now&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g2_q3-poster.jpg"
+                 aria-label="G2 Q3 real-world sample">
+            <source src="./assets/samples/real/g2_q3.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;in 5 minutes, Stop the device making that melodic chime now so it is no longer running&rdquo;</p>
+        </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="sample-header">
+          <span class="tag grounding-tag" style="background-color: #d8cfeb">G3</span>
+          <span class="sample-header-title">Space</span>
+          <span class="sample-header-meta">3 query types</span>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Synthetic</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <a href="./assets/samples/syn/g3_q1.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g3_q1.png" class="sample-media" alt="G3 Q1 synthetic scene: Can you tell me the vendor name of the device making the sound on my right?" loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G3 Q1 synthetic speech">
+            <source src="./assets/samples/syn/g3_q1.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Can you tell me the vendor name of the device making the sound on my right?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <a href="./assets/samples/syn/g3_q2.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g3_q2.png" class="sample-media" alt="G3 Q2 synthetic scene: Stop the device making that sound on my right and a little lower down so it is no longer running." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G3 Q2 synthetic speech">
+            <source src="./assets/samples/syn/g3_q2.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Stop the device making that sound on my right and a little lower down so it is no longer running.&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <a href="./assets/samples/syn/g3_q3.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g3_q3.png" class="sample-media" alt="G3 Q3 synthetic scene: Schedule the one in front of me to turn on in 11 minutes and do not turn it on now." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G3 Q3 synthetic speech">
+            <source src="./assets/samples/syn/g3_q3.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Schedule the one in front of me to turn on in 11 minutes and do not turn it on now.&rdquo;</p>
+        </div>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Real-world</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g3_q1-poster.jpg"
+                 aria-label="G3 Q1 real-world sample">
+            <source src="./assets/samples/real/g3_q1.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;What’s the vendor name of the device making that sound on my left ?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g3_q2-poster.jpg"
+                 aria-label="G3 Q2 real-world sample">
+            <source src="./assets/samples/real/g3_q2.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;Hey, turn off the device in front of me.&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g3_q3-poster.jpg"
+                 aria-label="G3 Q3 real-world sample">
+            <source src="./assets/samples/real/g3_q3.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;In 5 minutes, turn the device on my left on, set it to delicate mode and have it running.&rdquo;</p>
+        </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="sample-header">
+          <span class="tag grounding-tag" style="background-color: #f5cfca">G4</span>
+          <span class="sample-header-title">Identity</span>
+          <span class="sample-header-meta">4 query types</span>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Synthetic</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <a href="./assets/samples/syn/g4_q1.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g4_q1.png" class="sample-media" alt="G4 Q1 synthetic scene: Which robot-vacuum phases does the RVC in my room support?" loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G4 Q1 synthetic speech">
+            <source src="./assets/samples/syn/g4_q1.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Which robot-vacuum phases does the RVC in my room support?&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <a href="./assets/samples/syn/g4_q2.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g4_q2.png" class="sample-media" alt="G4 Q2 synthetic scene: Turn on the air conditioner in my room, set it to cooling and the fan to fifty percent." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G4 Q2 synthetic speech">
+            <source src="./assets/samples/syn/g4_q2.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Turn on the air conditioner in my room, set it to cooling and the fan to fifty percent.&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <a href="./assets/samples/syn/g4_q3.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g4_q3.png" class="sample-media" alt="G4 Q3 synthetic scene: Before I head out, power off the microwave in my room exactly 19 minutes before dishwasher in the home office finishes cleaning." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G4 Q3 synthetic speech">
+            <source src="./assets/samples/syn/g4_q3.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;Before I head out, power off the microwave in my room exactly 19 minutes before dishwasher in the home office finishes cleaning.&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q4</b> Implicit intent</p>
+          <a href="./assets/samples/syn/g4_q4.png" target="_blank" rel="noopener">
+            <img src="./assets/samples/syn/g4_q4.png" class="sample-media" alt="G4 Q4 synthetic scene: My room is too bright." loading="lazy">
+          </a>
+          <audio class="sample-audio" controls preload="none" aria-label="G4 Q4 synthetic speech">
+            <source src="./assets/samples/syn/g4_q4.wav" type="audio/wav">
+          </audio>
+          <p class="sample-transcript">&ldquo;My room is too bright.&rdquo;</p>
+        </div>
+        </div>
+        <h4 class="title is-6 sample-domain-title">Real-world</h4>
+        <div class="columns is-multiline">
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q1</b> State inquiry</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g4_q1-poster.jpg"
+                 aria-label="G4 Q1 real-world sample">
+            <source src="./assets/samples/real/g4_q1.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;What's the vendor ID of the AC in my room?&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q2</b> Explicit device control</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g4_q2-poster.jpg"
+                 aria-label="G4 Q2 real-world sample">
+            <source src="./assets/samples/real/g4_q2.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;Turn off the humidifier in my room now.&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q3</b> Workflow scheduling</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g4_q3-poster.jpg"
+                 aria-label="G4 Q3 real-world sample">
+            <source src="./assets/samples/real/g4_q3.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;In 10 minutes, turn on the dimmer light in my room and set it to 90 percent.&rdquo;</p>
+        </div>
+        <div class="column is-one-quarter">
+          <p class="sample-query"><b>Q4</b> Implicit intent</p>
+          <video class="sample-media" controls playsinline preload="none" poster="./assets/samples/real/g4_q4-poster.jpg"
+                 aria-label="G4 Q4 real-world sample">
+            <source src="./assets/samples/real/g4_q4.mp4" type="video/mp4">
+          </video>
+          <p class="sample-transcript">&ldquo;The air feels kind of dusty and my throat is a bit scratchy in my room.&rdquo;</p>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="prome">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Simple agentic baseline</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>PRO</b>cedural <b>M</b>emory for multimodal <b>E</b>vidence gathering: a lightweight
+            agentic baseline for adaptive evidence acquisition.
+          </p>
+          <p>
+            PROME equips the agent with a set of <b>multimodal perception tools</b> and augments its
+            reasoning with <b>procedural memory</b> that captures reusable strategies for resolving
+            grounding ambiguities.
+          </p>
+          <p>
+            The perception tools extract audio, visual, and spatial evidence through speech
+            recognition, sound localization, pointing, and identity matching. The procedural memory
+            guides tool invocation and the integration of tool outputs.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width has-text-centered">
+        <a href="./assets/figures/agent.pdf" target="_blank" rel="noopener">
+          <img src="./assets/images/prome.webp" width="3200" height="967"
+               alt="Figure 4: PROME adds perception tools, a schema selector, a state tracker, and procedural memory to the baseline ReAct agent loop."
+               loading="lazy">
+        </a>
+        <p class="figure-caption">
+          <b>Figure 4: Illustration of the agentic framework.</b> The baseline excludes the
+          components highlighted in orange, while PROME incorporates them. The figure visualizes the
+          roles and interactions of the episode components (E1&ndash;E4), simulator, tools, and evaluation.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Main results</h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="table-container">
+          <table class="table is-fullwidth is-narrow main-results-table">
+            <caption>
+              <b>Results on OmniSmartHome across grounding types (G0&ndash;G4), with and without PROME.</b>
+              For each grounding type, we report grounding accuracy (Gr.) and goal accuracy (Goal),
+              averaged over query types. For models with PROME, the <i>Gain</i> rows report the change
+              in percentage points relative to its backbone.
+            </caption>
+            <thead>
+              <tr><th rowspan="2">Model</th><th colspan="2" class="has-text-centered col-all">All</th><th colspan="2" class="has-text-centered "><b>G0</b> Speech</th><th colspan="2" class="has-text-centered "><b>G1</b> Gesture</th><th colspan="2" class="has-text-centered "><b>G2</b> Sound</th><th colspan="2" class="has-text-centered "><b>G3</b> Space</th><th colspan="2" class="has-text-centered "><b>G4</b> Identity</th></tr>
+              <tr><th class="has-text-centered col-all">Gr.</th><th class="has-text-centered col-all">Goal</th><th class="has-text-centered ">Gr.</th><th class="has-text-centered ">Goal</th><th class="has-text-centered ">Gr.</th><th class="has-text-centered ">Goal</th><th class="has-text-centered ">Gr.</th><th class="has-text-centered ">Goal</th><th class="has-text-centered ">Gr.</th><th class="has-text-centered ">Goal</th><th class="has-text-centered ">Gr.</th><th class="has-text-centered ">Goal</th></tr>
+            </thead>
+            <tbody>
+              <tr class="human-row"><th>Human Level</th><td class="col-all">94.8</td><td class="col-all">82.3</td><td>97.8</td><td>82.1</td><td>97.3</td><td>89.4</td><td>93.1</td><td>91.7</td><td>93.4</td><td>84.1</td><td>91.7</td><td>80.4</td></tr>
+              <tr class="group-row"><td colspan="13">Open-source Omni-LLMs (&lt;10B)</td></tr>
+              <tr><th>Video-LLaMA2 <small>7B</small></th><td class="col-all">5.8</td><td class="col-all">4.9</td><td>6.8</td><td>3.4</td><td>6.2</td><td>6.9</td><td>6.2</td><td>6.2</td><td>7.6</td><td>6.2</td><td>2.9</td><td>2.9</td></tr>
+              <tr class="is-backbone"><th>Qwen2.5-Omni <small>7B</small></th><td class="col-all">33.0</td><td class="col-all">17.6</td><td>55.5</td><td>25.5</td><td>30.9</td><td>19.4</td><td>28.1</td><td>14.2</td><td>27.2</td><td>17.4</td><td>20.3</td><td>10.9</td></tr>
+              <tr><th>Spatial-Omni <small>7B</small></th><td class="col-all">20.0</td><td class="col-all">11.5</td><td>39.1</td><td>14.1</td><td>14.9</td><td>11.5</td><td>16.3</td><td>10.4</td><td>16.0</td><td>11.8</td><td>10.4</td><td>9.4</td></tr>
+              <tr><th>video-SALMONN2+ <small>7B</small></th><td class="col-all">27.0</td><td class="col-all">13.7</td><td>48.2</td><td>20.6</td><td>20.1</td><td>11.8</td><td>23.6</td><td>13.5</td><td>24.7</td><td>14.9</td><td>15.4</td><td>7.6</td></tr>
+              <tr><th>video-SALMONN-o1 <small>7B</small></th><td class="col-all">24.5</td><td class="col-all">10.2</td><td>44.5</td><td>13.5</td><td>24.7</td><td>10.4</td><td>17.4</td><td>9.4</td><td>25.3</td><td>11.8</td><td>9.1</td><td>6.5</td></tr>
+              <tr><th>OmniVinci <small>9B</small></th><td class="col-all">17.8</td><td class="col-all">8.8</td><td>31.2</td><td>9.9</td><td>9.0</td><td>6.9</td><td>14.9</td><td>9.7</td><td>17.0</td><td>9.7</td><td>13.5</td><td>7.6</td></tr>
+              <tr><th>MiniCPM-o-4.5 <small>9B</small></th><td class="col-all">60.6</td><td class="col-all">30.9</td><td>85.2</td><td>51.0</td><td>56.9</td><td>29.9</td><td>56.6</td><td>26.4</td><td>59.4</td><td>32.3</td><td>42.7</td><td>14.1</td></tr>
+              <tr class="group-row"><td colspan="13">Large Open-source Omni-LLMs</td></tr>
+              <tr class="is-backbone"><th>Gemma4 <small>12B</small></th><td class="col-all">50.6</td><td class="col-all">25.2</td><td>69.3</td><td>45.3</td><td>46.5</td><td>19.1</td><td>55.2</td><td>29.2</td><td>54.9</td><td>26.0</td><td>28.1</td><td>6.0</td></tr>
+              <tr class="is-backbone"><th>Nemotron3-Omni <small>30B-A3B</small></th><td class="col-all">62.7</td><td class="col-all">44.5</td><td>86.5</td><td>60.9</td><td>65.3</td><td>52.4</td><td>67.4</td><td>47.2</td><td>64.9</td><td>51.4</td><td>31.8</td><td>15.1</td></tr>
+              <tr><th>Qwen3-Omni-Instruct <small>30B-A3B</small></th><td class="col-all">66.6</td><td class="col-all">43.8</td><td>88.0</td><td>63.0</td><td>66.3</td><td>53.8</td><td>77.4</td><td>38.2</td><td>60.8</td><td>48.6</td><td>41.7</td><td>17.4</td></tr>
+              <tr class="is-backbone"><th>Qwen3-Omni-Think <small>30B-A3B</small></th><td class="col-all">65.9</td><td class="col-all">48.4</td><td>87.8</td><td>67.4</td><td>66.0</td><td>56.6</td><td>79.9</td><td>56.9</td><td>72.2</td><td>55.2</td><td>28.6</td><td>11.7</td></tr>
+              <tr><th>MiMo-V2.5 <small>310B-A15B</small></th><td class="col-all">78.4</td><td class="col-all">60.2</td><td>93.5</td><td>73.7</td><td>72.2</td><td>63.5</td><td>81.9</td><td>60.8</td><td>84.7</td><td>69.4</td><td>60.7</td><td>37.0</td></tr>
+              <tr class="group-row"><td colspan="13">Proprietary Omni-LLMs</td></tr>
+              <tr class="is-backbone"><th>Gemini-2.5-Flash</th><td class="col-all">73.7</td><td class="col-all">56.2</td><td>94.0</td><td>76.8</td><td>69.4</td><td>60.1</td><td>74.3</td><td>54.9</td><td>78.1</td><td>63.2</td><td>52.6</td><td>28.6</td></tr>
+              <tr class="is-backbone"><th>Gemini-2.5-Pro</th><td class="col-all">81.0</td><td class="col-all">63.1</td><td>95.1</td><td>80.5</td><td>74.7</td><td>66.7</td><td>81.9</td><td>50.3</td><td>83.0</td><td>69.8</td><td>69.5</td><td>47.7</td></tr>
+              <tr><th>Gemini-3.1-Pro (Preview)</th><td class="col-all">85.6</td><td class="col-all">73.4</td><td>95.3</td><td>81.0</td><td>76.4</td><td>71.5</td><td>97.6</td><td>80.9</td><td>87.5</td><td>79.2</td><td>72.4</td><td>57.3</td></tr>
+              <tr><th>Qwen3.8-Omni-Flash</th><td class="col-all">81.7</td><td class="col-all">63.1</td><td>93.2</td><td>76.8</td><td>76.7</td><td>64.2</td><td>92.7</td><td>66.0</td><td>85.4</td><td>72.2</td><td>63.0</td><td>39.6</td></tr>
+              <tr class="group-row"><td colspan="13">Agent Baseline</td></tr>
+              <tr class="is-backbone prome-row"><th>Qwen2.5-Omni + <b>PROME</b></th><td class="col-all">38.2</td><td class="col-all">22.4</td><td>61.5</td><td>34.6</td><td>41.0</td><td>28.1</td><td>35.1</td><td>14.2</td><td>28.1</td><td>22.9</td><td>22.9</td><td>11.7</td></tr>
+              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+5.2</span></td><td class="col-all"><span class="gain">+4.8</span></td><td><span class="gain">+6.0</span></td><td><span class="gain">+9.1</span></td><td><span class="gain">+10.1</span></td><td><span class="gain">+8.7</span></td><td><span class="gain">+7.0</span></td><td><span class="gain">+0.0</span></td><td><span class="gain">+0.9</span></td><td><span class="gain">+5.5</span></td><td><span class="gain">+2.6</span></td><td><span class="gain">+0.8</span></td></tr>
+              <tr class="is-backbone prome-row"><th>Gemma4 + <b>PROME</b></th><td class="col-all">74.0</td><td class="col-all">59.3</td><td>86.2</td><td>73.4</td><td>65.3</td><td>58.3</td><td>89.6</td><td>70.8</td><td>75.7</td><td>58.3</td><td>55.5</td><td>37.8</td></tr>
+              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+23.4</span></td><td class="col-all"><span class="gain">+34.1</span></td><td><span class="gain">+16.9</span></td><td><span class="gain">+28.1</span></td><td><span class="gain">+18.8</span></td><td><span class="gain">+39.2</span></td><td><span class="gain">+34.4</span></td><td><span class="gain">+41.6</span></td><td><span class="gain">+20.8</span></td><td><span class="gain">+32.3</span></td><td><span class="gain">+27.4</span></td><td><span class="gain">+31.8</span></td></tr>
+              <tr class="is-backbone prome-row"><th>Nemotron + <b>PROME</b></th><td class="col-all">65.2</td><td class="col-all">49.1</td><td>88.8</td><td>66.7</td><td>64.9</td><td>55.6</td><td>70.1</td><td>53.8</td><td>70.8</td><td>57.6</td><td>33.9</td><td>16.9</td></tr>
+              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+2.5</span></td><td class="col-all"><span class="gain">+4.6</span></td><td><span class="gain">+2.3</span></td><td><span class="gain">+5.8</span></td><td><span class="loss">-0.4</span></td><td><span class="gain">+3.2</span></td><td><span class="gain">+2.7</span></td><td><span class="gain">+6.6</span></td><td><span class="gain">+5.9</span></td><td><span class="gain">+6.2</span></td><td><span class="gain">+2.1</span></td><td><span class="gain">+1.8</span></td></tr>
+              <tr class="is-backbone prome-row"><th>Qwen3-Think + <b>PROME</b></th><td class="col-all">70.2</td><td class="col-all">53.9</td><td>87.5</td><td>69.8</td><td>70.1</td><td>58.3</td><td>86.5</td><td>68.8</td><td>77.1</td><td>62.2</td><td>35.4</td><td>17.2</td></tr>
+              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+4.3</span></td><td class="col-all"><span class="gain">+5.5</span></td><td><span class="loss">-0.3</span></td><td><span class="gain">+2.4</span></td><td><span class="gain">+4.1</span></td><td><span class="gain">+1.7</span></td><td><span class="gain">+6.6</span></td><td><span class="gain">+11.9</span></td><td><span class="gain">+4.9</span></td><td><span class="gain">+7.0</span></td><td><span class="gain">+6.8</span></td><td><span class="gain">+5.5</span></td></tr>
+              <tr class="is-backbone prome-row"><th>Gemini-2.5-Flash + <b>PROME</b></th><td class="col-all">78.2</td><td class="col-all">62.3</td><td>91.9</td><td>76.6</td><td>72.2</td><td>62.2</td><td>81.2</td><td>63.5</td><td>77.8</td><td>65.6</td><td>67.2</td><td>44.5</td></tr>
+              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+4.5</span></td><td class="col-all"><span class="gain">+6.1</span></td><td><span class="loss">-2.1</span></td><td><span class="loss">-0.2</span></td><td><span class="gain">+2.8</span></td><td><span class="gain">+2.1</span></td><td><span class="gain">+6.9</span></td><td><span class="gain">+8.6</span></td><td><span class="loss">-0.3</span></td><td><span class="gain">+2.4</span></td><td><span class="gain">+14.6</span></td><td><span class="gain">+15.9</span></td></tr>
+              <tr class="is-backbone prome-row"><th>Gemini-2.5-Pro + <b>PROME</b></th><td class="col-all">85.0</td><td class="col-all">69.2</td><td>96.6</td><td>79.4</td><td>74.3</td><td>66.3</td><td>86.8</td><td>68.4</td><td>87.8</td><td>73.6</td><td>78.1</td><td>58.3</td></tr>
+              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+4.0</span></td><td class="col-all"><span class="gain">+6.1</span></td><td><span class="gain">+1.5</span></td><td><span class="loss">-1.1</span></td><td><span class="loss">-0.4</span></td><td><span class="loss">-0.4</span></td><td><span class="gain">+4.9</span></td><td><span class="gain">+18.1</span></td><td><span class="gain">+4.8</span></td><td><span class="gain">+3.8</span></td><td><span class="gain">+8.6</span></td><td><span class="gain">+10.6</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="columns">
+          <div class="column">
+            <h3 class="title is-5">Grounding accuracy</h3>
+            <div class="content has-text-justified">
+              <p>Grounding accuracy measures whether the declared device matches the ground-truth
+                target. For infeasible queries where the target device does not exist, the agent is
+                expected to declare no target.</p>
+            </div>
+          </div>
+          <div class="column">
+            <h3 class="title is-5">Goal accuracy</h3>
+            <div class="content has-text-justified">
+              <p>Goal accuracy measures whether the agent satisfies the requested goal. Feasible
+                Q2&ndash;Q4 queries are evaluated using the final simulator state; Q1 and infeasible
+                queries are evaluated using an LLM-as-a-judge.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="./assets/figures/main.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This website borrows the <a href="https://github.com/nerfies/nerfies.github.io">source
+            code</a> of the <a href="https://nerfies.github.io">Nerfies</a> project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

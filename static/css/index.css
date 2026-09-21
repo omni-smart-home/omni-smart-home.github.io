@@ -1,0 +1,441 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+
+/* ----- OmniSmartHome ----- */
+
+.teaser img {
+  border-radius: 10px;
+}
+
+.figure-caption {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #555;
+  margin-top: 0.75rem;
+}
+
+.figure-caption b {
+  color: #363636;
+}
+
+.grounding-tag {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: bold;
+  color: #363636;
+}
+
+.grounding-list td:first-child {
+  width: 2.6rem;
+  white-space: nowrap;
+}
+
+.stats .title {
+  font-family: 'Google Sans', sans-serif;
+  margin-bottom: 0.25rem !important;
+}
+
+.stats .subtitle {
+  color: #555;
+}
+
+.step-number {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: bold;
+  color: hsl(204, 86%, 53%);
+  margin-bottom: 0.25rem;
+}
+
+.generation-steps p,
+.method-stages p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.query-list td {
+  vertical-align: middle;
+  border: none;
+  border-bottom: 1px solid #ededed;
+}
+
+.query-list .query-description {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.query-scope {
+  font-size: 0.7rem;
+  color: #777;
+  white-space: nowrap;
+}
+
+.main-results-table {
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.main-results-table caption {
+  white-space: normal;
+  text-align: left;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #555;
+  padding-bottom: 0.9rem;
+}
+
+.main-results-table caption b {
+  color: #363636;
+}
+
+.main-results-table th,
+.main-results-table td {
+  vertical-align: middle;
+  border-width: 0 0 1px;
+}
+
+.main-results-table td {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.main-results-table tbody th {
+  font-weight: 500;
+}
+
+.main-results-table tbody th small {
+  font-size: 0.85em;
+  font-weight: normal;
+  color: #6e6e6e;
+}
+
+/* \columncolor{allshade} on the aggregate columns. */
+.main-results-table .col-all {
+  background-color: #f5f5f5;
+}
+
+/* \rowcolor{modelhighlight} on the backbones we also run with PROME. */
+.main-results-table .is-backbone th,
+.main-results-table .is-backbone td {
+  background-color: #ebf0fa;
+}
+
+.main-results-table .human-row th,
+.main-results-table .human-row td {
+  font-weight: 600;
+}
+
+.main-results-table .group-row td {
+  text-align: center;
+  font-style: italic;
+  color: #555;
+  border-top: 1px solid #dbdbdb;
+}
+
+.main-results-table .prome-row th,
+.main-results-table .prome-row td {
+  border-bottom: none;
+}
+
+.main-results-table .gain-row th {
+  padding-left: 1.5rem;
+  font-weight: normal;
+  color: #6e6e6e;
+}
+
+.main-results-table .gain-row th,
+.main-results-table .gain-row td {
+  padding-top: 0;
+  font-size: 0.92em;
+}
+
+.main-results-table .gain {
+  color: rgb(90, 120, 160);
+  font-weight: bold;
+}
+
+.main-results-table .loss {
+  color: rgb(160, 115, 120);
+}
+
+/* Demo carousel: captions under each video. */
+.results-carousel .item .item-caption {
+  font-size: 1rem;
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.results-carousel .item .item-caption p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.results-carousel .item video {
+  width: 100%;
+  background: #111;
+}
+
+/* Benchmark sample carousel. */
+.sample-carousel {
+  overflow: hidden;
+}
+
+.sample-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  background: #fff;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.sample-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid #ededed;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.sample-header-title {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: bold;
+}
+
+.sample-header-meta {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sample-domain-title {
+  margin-bottom: 0.75rem !important;
+}
+
+.sample-query {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  min-height: 2.4em;
+}
+
+.sample-query b {
+  color: hsl(204, 86%, 53%);
+  margin-right: 0.3rem;
+}
+
+.sample-media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
+
+video.sample-media {
+  background: #111;
+}
+
+.sample-audio {
+  width: 100%;
+  height: 34px;
+  margin-top: 0.5rem;
+}
+
+.sample-transcript {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.stats .subtitle {
+  margin-top: 0 !important;
+}
+
+/* Demo carousel sits at about two thirds of the container width. */
+#demo-carousel {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Taxonomy figure sits at about two thirds of its column. */
+.taxonomy-figure img {
+  max-width: 66%;
+  margin: 0 auto;
+}
+
+.taxonomy-figure .figure-caption {
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.publication-title.is-1 {
+  font-size: 2.6rem;
+}
+
+.title-icon {
+  display: inline-block;
+  height: 1.5em;
+  width: auto;
+  vertical-align: -0.35em;
+  margin-right: 0.02em;
+}
