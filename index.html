@@ -49,6 +49,7 @@
       <a class="navbar-item" href="#benchmark">Benchmark</a>
       <a class="navbar-item" href="#prome">Simple agentic baseline</a>
       <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#error-analysis">Error analysis</a>
     </div>
   </div>
 </nav>
@@ -166,23 +167,23 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Smart-home assistants are expected to act on natural user requests, yet existing
-            benchmarks largely assume that the intended device is explicitly specified in text. In
-            everyday interaction, however, people often leave this information implicit and convey
-            it through non-verbal cues such as gestures, sounds, spatial context, or speaker
-            identity. In this paper, we introduce <b>OmniSmartHome</b>, a multimodal smart-home
-            benchmark in which agents must ground such cues to the intended device before executing
-            the requested operation. OmniSmartHome contains <b>1,360</b> synthetic and <b>272</b>
-            real-world episodes with visual observations and spatial audio, covering five grounding
-            types: speech, gesture, sound, space, and user identity. We evaluate 16 recent
-            omni-modal large language models and find a clear gap between explicit and implicit
-            grounding. Models perform well when the target device is directly named in speech, but
-            struggle when it must be inferred from multimodal evidence. To study whether these
-            failures can be mitigated through agentic perception, we further propose <b>PROME</b>
-            (PROcedural Memory for multimodal Evidence gathering), a lightweight framework that
-            equips an agent with specialized audio-visual perception tools and a learned procedural
-            memory for deciding when to invoke them and how to combine their outputs. PROME
-            consistently improves grounding and task execution across six Omni-LLMs.
+            Smart-home assistants are expected to handle the diverse, realistic requests that arise
+            in daily life. In such interactions, users often convey intent through cues beyond
+            language&mdash;a pointing gesture, an ambient sound, or surrounding context. Existing
+            smart-home benchmarks, however, are built largely around settings in which the
+            user&rsquo;s request is fully specified in text. To bridge this gap, we introduce
+            <b>OmniSmartHome</b>, a multimodal smart-home benchmark in which users indicate the
+            devices they intend to control through five types of multimodal cues: speech, gesture,
+            sound, space, and user identity. OmniSmartHome contains <b>1,360</b> synthetic and
+            <b>272</b> real-world episodes, each pairing visual observations with spatial audio. We
+            evaluate 16 omnimodal large language models (Omni-LLMs) and reveal that, although they
+            perform strongly when the target device is explicitly named in speech, performance drops
+            substantially when resolving the target requires reasoning over implicit multimodal
+            evidence. To address this limitation, we propose <b>PROME</b> (PROcedural Memory for
+            multimodal Evidence gathering), a lightweight agentic framework that equips agents with
+            specialized audio-visual perception tools and procedural memory for deciding which
+            evidence to gather and how to combine it. PROME consistently improves both device
+            grounding and task execution across six Omni-LLMs.
           </p>
         </div>
       </div>
@@ -628,7 +629,7 @@
     <div class="columns is-centered">
       <div class="column is-full-width has-text-centered">
         <a href="./assets/figures/agent.pdf" target="_blank" rel="noopener">
-          <img src="./assets/images/prome.webp" width="3200" height="951"
+          <img src="./assets/images/prome.webp" width="3200" height="949"
                alt="Figure 4: PROME adds perception tools, a grounding ambiguity table, a state update, and a procedure policy to the baseline ReAct agent loop."
                loading="lazy">
         </a>
@@ -667,8 +668,8 @@
             <caption>
               <b>Results on OmniSmartHome across grounding types (G0&ndash;G4), with and without PROME.</b>
               For each grounding type, we report grounding accuracy (Gr.) and goal accuracy (Goal),
-              averaged over query types. For models with PROME, the <i>Gain</i> rows report the change
-              in percentage points relative to its backbone.
+              averaged over query types. For models with PROME, we also report the change in percentage
+              points relative to its vanilla backbone.
             </caption>
             <thead>
               <tr><th rowspan="2">Model</th><th colspan="2" class="has-text-centered col-all">All</th><th colspan="2" class="has-text-centered "><b>G0</b> Speech</th><th colspan="2" class="has-text-centered "><b>G1</b> Gesture</th><th colspan="2" class="has-text-centered "><b>G2</b> Sound</th><th colspan="2" class="has-text-centered "><b>G3</b> Space</th><th colspan="2" class="has-text-centered "><b>G4</b> User identity</th></tr>
@@ -678,43 +679,43 @@
               <tr class="human-row"><th>Human Level</th><td class="col-all">94.8</td><td class="col-all">82.3</td><td>97.8</td><td>82.1</td><td>97.3</td><td>89.4</td><td>93.1</td><td>91.7</td><td>93.4</td><td>84.1</td><td>91.7</td><td>80.4</td></tr>
               <tr class="group-row"><td colspan="13">Open-source Omni-LLMs (&lt;10B)</td></tr>
               <tr><th>Video-LLaMA2 <small>7B</small></th><td class="col-all">5.8</td><td class="col-all">4.9</td><td>6.8</td><td>3.4</td><td>6.2</td><td>6.9</td><td>6.2</td><td>6.2</td><td>7.6</td><td>6.2</td><td>2.9</td><td>2.9</td></tr>
-              <tr class="is-backbone"><th>Qwen2.5-Omni <small>7B</small></th><td class="col-all">33.0</td><td class="col-all">17.6</td><td>55.5</td><td>25.5</td><td>30.9</td><td>19.4</td><td>28.1</td><td>14.2</td><td>27.2</td><td>17.4</td><td>20.3</td><td>10.9</td></tr>
+              <tr><th>Qwen2.5-Omni <small>7B</small></th><td class="col-all">33.0</td><td class="col-all">17.6</td><td>55.5</td><td>25.5</td><td>30.9</td><td>19.4</td><td>28.1</td><td>14.2</td><td>27.2</td><td>17.4</td><td>20.3</td><td>10.9</td></tr>
               <tr><th>Spatial-Omni <small>7B</small></th><td class="col-all">20.0</td><td class="col-all">11.5</td><td>39.1</td><td>14.1</td><td>14.9</td><td>11.5</td><td>16.3</td><td>10.4</td><td>16.0</td><td>11.8</td><td>10.4</td><td>9.4</td></tr>
               <tr><th>video-SALMONN2+ <small>7B</small></th><td class="col-all">27.0</td><td class="col-all">13.7</td><td>48.2</td><td>20.6</td><td>20.1</td><td>11.8</td><td>23.6</td><td>13.5</td><td>24.7</td><td>14.9</td><td>15.4</td><td>7.6</td></tr>
               <tr><th>video-SALMONN-o1 <small>7B</small></th><td class="col-all">24.5</td><td class="col-all">10.2</td><td>44.5</td><td>13.5</td><td>24.7</td><td>10.4</td><td>17.4</td><td>9.4</td><td>25.3</td><td>11.8</td><td>9.1</td><td>6.5</td></tr>
               <tr><th>OmniVinci <small>9B</small></th><td class="col-all">17.8</td><td class="col-all">8.8</td><td>31.2</td><td>9.9</td><td>9.0</td><td>6.9</td><td>14.9</td><td>9.7</td><td>17.0</td><td>9.7</td><td>13.5</td><td>7.6</td></tr>
               <tr><th>MiniCPM-o-4.5 <small>9B</small></th><td class="col-all">60.6</td><td class="col-all">30.9</td><td>85.2</td><td>51.0</td><td>56.9</td><td>29.9</td><td>56.6</td><td>26.4</td><td>59.4</td><td>32.3</td><td>42.7</td><td>14.1</td></tr>
               <tr class="group-row"><td colspan="13">Large Open-source Omni-LLMs</td></tr>
-              <tr class="is-backbone"><th>Gemma4 <small>12B</small></th><td class="col-all">50.6</td><td class="col-all">25.2</td><td>69.3</td><td>45.3</td><td>46.5</td><td>19.1</td><td>55.2</td><td>29.2</td><td>54.9</td><td>26.0</td><td>28.1</td><td>6.0</td></tr>
-              <tr class="is-backbone"><th>Nemotron3-Omni <small>30B-A3B</small></th><td class="col-all">62.7</td><td class="col-all">44.5</td><td>86.5</td><td>60.9</td><td>65.3</td><td>52.4</td><td>67.4</td><td>47.2</td><td>64.9</td><td>51.4</td><td>31.8</td><td>15.1</td></tr>
+              <tr><th>Gemma4 <small>12B</small></th><td class="col-all">50.6</td><td class="col-all">25.2</td><td>69.3</td><td>45.3</td><td>46.5</td><td>19.1</td><td>55.2</td><td>29.2</td><td>54.9</td><td>26.0</td><td>28.1</td><td>6.0</td></tr>
+              <tr><th>Nemotron3-Omni <small>30B-A3B</small></th><td class="col-all">62.7</td><td class="col-all">44.5</td><td>86.5</td><td>60.9</td><td>65.3</td><td>52.4</td><td>67.4</td><td>47.2</td><td>64.9</td><td>51.4</td><td>31.8</td><td>15.1</td></tr>
               <tr><th>Qwen3-Omni-Instruct <small>30B-A3B</small></th><td class="col-all">66.6</td><td class="col-all">43.8</td><td>88.0</td><td>63.0</td><td>66.3</td><td>53.8</td><td>77.4</td><td>38.2</td><td>60.8</td><td>48.6</td><td>41.7</td><td>17.4</td></tr>
-              <tr class="is-backbone"><th>Qwen3-Omni-Think <small>30B-A3B</small></th><td class="col-all">65.9</td><td class="col-all">48.4</td><td>87.8</td><td>67.4</td><td>66.0</td><td>56.6</td><td>79.9</td><td>56.9</td><td>72.2</td><td>55.2</td><td>28.6</td><td>11.7</td></tr>
+              <tr><th>Qwen3-Omni-Think <small>30B-A3B</small></th><td class="col-all">65.9</td><td class="col-all">48.4</td><td>87.8</td><td>67.4</td><td>66.0</td><td>56.6</td><td>79.9</td><td>56.9</td><td>72.2</td><td>55.2</td><td>28.6</td><td>11.7</td></tr>
               <tr><th>MiMo-V2.5 <small>310B-A15B</small></th><td class="col-all">78.4</td><td class="col-all">60.2</td><td>93.5</td><td>73.7</td><td>72.2</td><td>63.5</td><td>81.9</td><td>60.8</td><td>84.7</td><td>69.4</td><td>60.7</td><td>37.0</td></tr>
               <tr class="group-row"><td colspan="13">Proprietary Omni-LLMs</td></tr>
-              <tr class="is-backbone"><th>Gemini-2.5-Flash</th><td class="col-all">73.7</td><td class="col-all">56.2</td><td>94.0</td><td>76.8</td><td>69.4</td><td>60.1</td><td>74.3</td><td>54.9</td><td>78.1</td><td>63.2</td><td>52.6</td><td>28.6</td></tr>
-              <tr class="is-backbone"><th>Gemini-2.5-Pro</th><td class="col-all">81.0</td><td class="col-all">63.1</td><td>95.1</td><td>80.5</td><td>74.7</td><td>66.7</td><td>81.9</td><td>50.3</td><td>83.0</td><td>69.8</td><td>69.5</td><td>47.7</td></tr>
+              <tr><th>Gemini-2.5-Flash</th><td class="col-all">73.7</td><td class="col-all">56.2</td><td>94.0</td><td>76.8</td><td>69.4</td><td>60.1</td><td>74.3</td><td>54.9</td><td>78.1</td><td>63.2</td><td>52.6</td><td>28.6</td></tr>
+              <tr><th>Gemini-2.5-Pro</th><td class="col-all">81.0</td><td class="col-all">63.1</td><td>95.1</td><td>80.5</td><td>74.7</td><td>66.7</td><td>81.9</td><td>50.3</td><td>83.0</td><td>69.8</td><td>69.5</td><td>47.7</td></tr>
               <tr><th>Gemini-3.1-Pro (Preview)</th><td class="col-all">85.6</td><td class="col-all">73.4</td><td>95.3</td><td>81.0</td><td>76.4</td><td>71.5</td><td>97.6</td><td>80.9</td><td>87.5</td><td>79.2</td><td>72.4</td><td>57.3</td></tr>
               <tr><th>Qwen3.8-Omni-Flash</th><td class="col-all">81.7</td><td class="col-all">63.1</td><td>93.2</td><td>76.8</td><td>76.7</td><td>64.2</td><td>92.7</td><td>66.0</td><td>85.4</td><td>72.2</td><td>63.0</td><td>39.6</td></tr>
               <tr class="group-row"><td colspan="13">Agent Baseline</td></tr>
-              <tr class="is-backbone prome-row"><th>Qwen2.5-Omni + <b>PROME</b></th><td class="col-all">38.2</td><td class="col-all">22.4</td><td>61.5</td><td>34.6</td><td>41.0</td><td>28.1</td><td>35.1</td><td>14.2</td><td>28.1</td><td>22.9</td><td>22.9</td><td>11.7</td></tr>
-              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+5.2</span></td><td class="col-all"><span class="gain">+4.8</span></td><td><span class="gain">+6.0</span></td><td><span class="gain">+9.1</span></td><td><span class="gain">+10.1</span></td><td><span class="gain">+8.7</span></td><td><span class="gain">+7.0</span></td><td><span class="gain">+0.0</span></td><td><span class="gain">+0.9</span></td><td><span class="gain">+5.5</span></td><td><span class="gain">+2.6</span></td><td><span class="gain">+0.8</span></td></tr>
-              <tr class="is-backbone prome-row"><th>Gemma4 + <b>PROME</b></th><td class="col-all">74.0</td><td class="col-all">59.3</td><td>86.2</td><td>73.4</td><td>65.3</td><td>58.3</td><td>89.6</td><td>70.8</td><td>75.7</td><td>58.3</td><td>55.5</td><td>37.8</td></tr>
-              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+23.4</span></td><td class="col-all"><span class="gain">+34.1</span></td><td><span class="gain">+16.9</span></td><td><span class="gain">+28.1</span></td><td><span class="gain">+18.8</span></td><td><span class="gain">+39.2</span></td><td><span class="gain">+34.4</span></td><td><span class="gain">+41.6</span></td><td><span class="gain">+20.8</span></td><td><span class="gain">+32.3</span></td><td><span class="gain">+27.4</span></td><td><span class="gain">+31.8</span></td></tr>
-              <tr class="is-backbone prome-row"><th>Nemotron + <b>PROME</b></th><td class="col-all">65.2</td><td class="col-all">49.1</td><td>88.8</td><td>66.7</td><td>64.9</td><td>55.6</td><td>70.1</td><td>53.8</td><td>70.8</td><td>57.6</td><td>33.9</td><td>16.9</td></tr>
-              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+2.5</span></td><td class="col-all"><span class="gain">+4.6</span></td><td><span class="gain">+2.3</span></td><td><span class="gain">+5.8</span></td><td><span class="loss">-0.4</span></td><td><span class="gain">+3.2</span></td><td><span class="gain">+2.7</span></td><td><span class="gain">+6.6</span></td><td><span class="gain">+5.9</span></td><td><span class="gain">+6.2</span></td><td><span class="gain">+2.1</span></td><td><span class="gain">+1.8</span></td></tr>
-              <tr class="is-backbone prome-row"><th>Qwen3-Think + <b>PROME</b></th><td class="col-all">70.2</td><td class="col-all">53.9</td><td>87.5</td><td>69.8</td><td>70.1</td><td>58.3</td><td>86.5</td><td>68.8</td><td>77.1</td><td>62.2</td><td>35.4</td><td>17.2</td></tr>
-              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+4.3</span></td><td class="col-all"><span class="gain">+5.5</span></td><td><span class="loss">-0.3</span></td><td><span class="gain">+2.4</span></td><td><span class="gain">+4.1</span></td><td><span class="gain">+1.7</span></td><td><span class="gain">+6.6</span></td><td><span class="gain">+11.9</span></td><td><span class="gain">+4.9</span></td><td><span class="gain">+7.0</span></td><td><span class="gain">+6.8</span></td><td><span class="gain">+5.5</span></td></tr>
-              <tr class="is-backbone prome-row"><th>Gemini-2.5-Flash + <b>PROME</b></th><td class="col-all">78.2</td><td class="col-all">62.3</td><td>91.9</td><td>76.6</td><td>72.2</td><td>62.2</td><td>81.2</td><td>63.5</td><td>77.8</td><td>65.6</td><td>67.2</td><td>44.5</td></tr>
-              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+4.5</span></td><td class="col-all"><span class="gain">+6.1</span></td><td><span class="loss">-2.1</span></td><td><span class="loss">-0.2</span></td><td><span class="gain">+2.8</span></td><td><span class="gain">+2.1</span></td><td><span class="gain">+6.9</span></td><td><span class="gain">+8.6</span></td><td><span class="loss">-0.3</span></td><td><span class="gain">+2.4</span></td><td><span class="gain">+14.6</span></td><td><span class="gain">+15.9</span></td></tr>
-              <tr class="is-backbone prome-row"><th>Gemini-2.5-Pro + <b>PROME</b></th><td class="col-all">85.0</td><td class="col-all">69.2</td><td>96.6</td><td>79.4</td><td>74.3</td><td>66.3</td><td>86.8</td><td>68.4</td><td>87.8</td><td>73.6</td><td>78.1</td><td>58.3</td></tr>
-              <tr class="gain-row is-backbone"><th>Gain</th><td class="col-all"><span class="gain">+4.0</span></td><td class="col-all"><span class="gain">+6.1</span></td><td><span class="gain">+1.5</span></td><td><span class="loss">-1.1</span></td><td><span class="loss">-0.4</span></td><td><span class="loss">-0.4</span></td><td><span class="gain">+4.9</span></td><td><span class="gain">+18.1</span></td><td><span class="gain">+4.8</span></td><td><span class="gain">+3.8</span></td><td><span class="gain">+8.6</span></td><td><span class="gain">+10.6</span></td></tr>
+              <tr class="prome-row"><th rowspan="2">Qwen2.5-Omni + <b>PROME</b></th><td class="col-all">38.2</td><td class="col-all">22.4</td><td>61.5</td><td>34.6</td><td>41.0</td><td>28.1</td><td>35.1</td><td>14.2</td><td>28.1</td><td>22.9</td><td>22.9</td><td>11.7</td></tr>
+              <tr class="gain-row"><td class="col-all"><span class="gain">+5.2</span></td><td class="col-all"><span class="gain">+4.8</span></td><td><span class="gain">+6.0</span></td><td><span class="gain">+9.1</span></td><td><span class="gain">+10.1</span></td><td><span class="gain">+8.7</span></td><td><span class="gain">+7.0</span></td><td><span class="gain">+0.0</span></td><td><span class="gain">+0.9</span></td><td><span class="gain">+5.5</span></td><td><span class="gain">+2.6</span></td><td><span class="gain">+0.8</span></td></tr>
+              <tr class="prome-row"><th rowspan="2">Gemma4 + <b>PROME</b></th><td class="col-all">74.0</td><td class="col-all">59.3</td><td>86.2</td><td>73.4</td><td>65.3</td><td>58.3</td><td>89.6</td><td>70.8</td><td>75.7</td><td>58.3</td><td>55.5</td><td>37.8</td></tr>
+              <tr class="gain-row"><td class="col-all"><span class="gain">+23.4</span></td><td class="col-all"><span class="gain">+34.1</span></td><td><span class="gain">+16.9</span></td><td><span class="gain">+28.1</span></td><td><span class="gain">+18.8</span></td><td><span class="gain">+39.2</span></td><td><span class="gain">+34.4</span></td><td><span class="gain">+41.6</span></td><td><span class="gain">+20.8</span></td><td><span class="gain">+32.3</span></td><td><span class="gain">+27.4</span></td><td><span class="gain">+31.8</span></td></tr>
+              <tr class="prome-row"><th rowspan="2">Nemotron + <b>PROME</b></th><td class="col-all">65.2</td><td class="col-all">49.1</td><td>88.8</td><td>66.7</td><td>64.9</td><td>55.6</td><td>70.1</td><td>53.8</td><td>70.8</td><td>57.6</td><td>33.9</td><td>16.9</td></tr>
+              <tr class="gain-row"><td class="col-all"><span class="gain">+2.5</span></td><td class="col-all"><span class="gain">+4.6</span></td><td><span class="gain">+2.3</span></td><td><span class="gain">+5.8</span></td><td><span class="loss">-0.4</span></td><td><span class="gain">+3.2</span></td><td><span class="gain">+2.7</span></td><td><span class="gain">+6.6</span></td><td><span class="gain">+5.9</span></td><td><span class="gain">+6.2</span></td><td><span class="gain">+2.1</span></td><td><span class="gain">+1.8</span></td></tr>
+              <tr class="prome-row"><th rowspan="2">Qwen3-Think + <b>PROME</b></th><td class="col-all">70.2</td><td class="col-all">53.9</td><td>87.5</td><td>69.8</td><td>70.1</td><td>58.3</td><td>86.5</td><td>68.8</td><td>77.1</td><td>62.2</td><td>35.4</td><td>17.2</td></tr>
+              <tr class="gain-row"><td class="col-all"><span class="gain">+4.3</span></td><td class="col-all"><span class="gain">+5.5</span></td><td><span class="loss">-0.3</span></td><td><span class="gain">+2.4</span></td><td><span class="gain">+4.1</span></td><td><span class="gain">+1.7</span></td><td><span class="gain">+6.6</span></td><td><span class="gain">+11.9</span></td><td><span class="gain">+4.9</span></td><td><span class="gain">+7.0</span></td><td><span class="gain">+6.8</span></td><td><span class="gain">+5.5</span></td></tr>
+              <tr class="prome-row"><th rowspan="2">Gemini-2.5-Flash + <b>PROME</b></th><td class="col-all">78.2</td><td class="col-all">62.3</td><td>91.9</td><td>76.6</td><td>72.2</td><td>62.2</td><td>81.2</td><td>63.5</td><td>77.8</td><td>65.6</td><td>67.2</td><td>44.5</td></tr>
+              <tr class="gain-row"><td class="col-all"><span class="gain">+4.5</span></td><td class="col-all"><span class="gain">+6.1</span></td><td><span class="loss">-2.1</span></td><td><span class="loss">-0.2</span></td><td><span class="gain">+2.8</span></td><td><span class="gain">+2.1</span></td><td><span class="gain">+6.9</span></td><td><span class="gain">+8.6</span></td><td><span class="loss">-0.3</span></td><td><span class="gain">+2.4</span></td><td><span class="gain">+14.6</span></td><td><span class="gain">+15.9</span></td></tr>
+              <tr class="prome-row"><th rowspan="2">Gemini-2.5-Pro + <b>PROME</b></th><td class="col-all">85.0</td><td class="col-all">69.2</td><td>96.6</td><td>79.4</td><td>74.3</td><td>66.3</td><td>86.8</td><td>68.4</td><td>87.8</td><td>73.6</td><td>78.1</td><td>58.3</td></tr>
+              <tr class="gain-row"><td class="col-all"><span class="gain">+4.0</span></td><td class="col-all"><span class="gain">+6.1</span></td><td><span class="gain">+1.5</span></td><td><span class="loss">-1.1</span></td><td><span class="loss">-0.4</span></td><td><span class="loss">-0.4</span></td><td><span class="gain">+4.9</span></td><td><span class="gain">+18.1</span></td><td><span class="gain">+4.8</span></td><td><span class="gain">+3.8</span></td><td><span class="gain">+8.6</span></td><td><span class="gain">+10.6</span></td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="content has-text-justified">
           <p>
-            <b>Baselines.</b> Small open-source models show generally low grounding accuracy across
+            Small open-source models show generally low grounding accuracy across
             all grounding types, with MiniCPM-o-4.5 performing best in this group. Their goal
             accuracy is often substantially lower than their grounding accuracy, in some cases by
             more than a factor of two: even when these models identify the target device, they still
@@ -729,13 +730,84 @@
           </p>
           <p>
             <b>PROME.</b> PROME improves overall grounding and goal accuracy across all six
-            backbones. Gemma4, the weakest of the larger open-source baselines, gains 23.4 and 34.1
-            percentage points in grounding and goal accuracy, surpassing the other open-source
-            baselines. PROME also improves the strong Gemini models, by 4.5 / 6.1 points on
-            Gemini-2.5-Flash and 4.0 / 6.1 points on Gemini-2.5-Pro in grounding / goal accuracy.
-            Gains on G0 are limited, as these queries can be resolved from speech alone; G1&ndash;G4
-            benefit more, since they require acquiring and integrating additional multimodal
-            evidence.
+            backbones. Notably, Gemma4, the weakest larger open-source baseline, gains 23.4 / 34.1
+            percentage points in grounding / goal accuracy, respectively, surpassing the other
+            open-source vanilla agents. PROME also improves the strong Gemini models by 4.5 / 6.1
+            points on Gemini-2.5-Flash and 4.0 / 6.1 points on Gemini-2.5-Pro. Across grounding
+            types, gains on G0 are limited, as these queries can be resolved from speech alone and
+            need little additional perceptual evidence or procedural guidance. In contrast,
+            G1&ndash;G4 benefit more from PROME, since they require acquiring and integrating
+            additional multimodal evidence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="error-analysis">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Error analysis</h2>
+        <div class="content has-text-justified">
+          <p>
+            We categorize common grounding failures for Qwen3-Omni-Think, Gemini-2.5-Flash, and
+            Gemini-2.5-Pro, comparing the vanilla agents with PROME.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width has-text-centered">
+        <a href="./assets/figures/error_analysis.pdf" target="_blank" rel="noopener">
+          <img src="./assets/images/error_analysis.webp" width="3200" height="665"
+               alt="Share of failed episodes per grounding type for Qwen3-Think, Gemini-2.5-Flash and Gemini-2.5-Pro, vanilla versus PROME: G1 split by same-type and different-type confusions, G2, G3 split by speaker facing the camera or facing away, and G4."
+               loading="lazy">
+        </a>
+        <p class="figure-caption">
+          <b>Figure 5: Grounding failures by grounding type (vanilla vs. PROME).</b>
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified error-list">
+          <p>
+            <span class="tag grounding-tag" style="background-color: #c8e5ce">G1</span> <b>Gesture.</b>
+            Most errors involve selecting the wrong device, either another instance of the same type
+            or a nearby device of a different type. Same-type confusion rises sharply as the number
+            of visually similar candidates increases, from 6&ndash;18% when the target type is
+            unique to 67&ndash;87% when three or more similar devices are present. Different-type
+            errors often arise when the model is drawn to a larger or more visually salient
+            neighboring appliance.
+          </p>
+          <p>
+            <span class="tag grounding-tag" style="background-color: #f7e4bf">G2</span> <b>Sound.</b>
+            Vanilla agents often declare a source prematurely based on semantic priors about which
+            devices typically produce a given sound, rather than verifying candidate states or
+            acoustic evidence. For example, an alarm originating from a refrigerator may be
+            incorrectly attributed to a microwave simply because the agent assumes that microwaves
+            commonly emit alarm sounds. PROME reduces such errors by guiding the agents to localize
+            the sound source or inspect device attributes.
+          </p>
+          <p>
+            <span class="tag grounding-tag" style="background-color: #d8cfeb">G3</span> <b>Space.</b>
+            A major source of error is incorrect egocentric direction reasoning. Among directional
+            failures, more than 70% for the three models occur when the speaker faces the camera,
+            where the speaker&rsquo;s left&ndash;right directions are reversed relative to the
+            image. Errors are substantially less frequent when the speaker faces away from the
+            camera. With PROME, head-pose estimation helps resolve this viewpoint ambiguity and
+            reduces opposite-side declarations.
+          </p>
+          <p>
+            <span class="tag grounding-tag" style="background-color: #f5cfca">G4</span> <b>User identity.</b>
+            Many failures occur because the agent does not identify the speaker before resolving
+            person-specific references. The models often ignore references such as &ldquo;my
+            room&rdquo; and inspect the room of the speaker&rsquo;s current location. PROME reduces
+            these errors by encouraging identity-related evidence gathering.
           </p>
         </div>
       </div>
