@@ -387,12 +387,6 @@ body {
   font-weight: 600;
 }
 
-.sample-pane-note {
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 1rem;
-}
-
 /* Real-world samples: one roughly square card per slide. */
 #real-carousel {
   max-width: 540px;
