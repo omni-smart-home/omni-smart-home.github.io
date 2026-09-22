@@ -487,9 +487,15 @@ video.sample-media {
   margin-right: 0.02em;
 }
 
-/* Feasibility notes sit beside the query-type table and match its text size. */
-.feasibility-text {
+/* Headphone / autoplay hint under the demo and sample titles. */
+.listen-note {
   font-size: 0.85rem;
-  line-height: 1.6;
-  color: #555;
+  color: #666;
+  margin-top: -0.75rem;
+  margin-bottom: 1rem;
+}
+
+.listen-note .icon {
+  margin-right: 0.25rem;
+  vertical-align: -0.15em;
 }

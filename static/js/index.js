@@ -64,6 +64,42 @@ $(document).ready(function() {
       });
     });
 
+    // Demo and real-world videos play while in view. Browsers refuse sound before the visitor
+    // has interacted with the page, so a refused play() is retried muted, and the videos muted
+    // this way get their sound back on the first click or key press.
+    var autoVideos = document.querySelectorAll('#demos video, #real-carousel video');
+    if ('IntersectionObserver' in window) {
+      var inView = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          var video = entry.target;
+          if (entry.isIntersecting) {
+            video.play().catch(function() {
+              video.muted = true;
+              video.dataset.autoMuted = '1';
+              video.play().catch(function() {});
+            });
+          } else if (!video.paused) {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.6 });
+      autoVideos.forEach(function(video) {
+        inView.observe(video);
+      });
+    }
+    var restoreSound = function() {
+      autoVideos.forEach(function(video) {
+        if (video.dataset.autoMuted) {
+          video.muted = false;
+          delete video.dataset.autoMuted;
+        }
+      });
+      document.removeEventListener('pointerdown', restoreSound);
+      document.removeEventListener('keydown', restoreSound);
+    };
+    document.addEventListener('pointerdown', restoreSound);
+    document.addEventListener('keydown', restoreSound);
+
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) {
         pauseAllMedia();
