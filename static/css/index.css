@@ -482,6 +482,12 @@ video.sample-media {
   vertical-align: middle;
 }
 
+.grounding-intro {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.75rem !important;
+}
+
 .error-list .grounding-tag {
   margin-right: 0.2rem;
 }

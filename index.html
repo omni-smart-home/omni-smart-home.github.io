@@ -179,11 +179,11 @@
             evaluate 16 omnimodal large language models (Omni-LLMs) and reveal that, although they
             perform strongly when the target device is explicitly named in speech, performance drops
             substantially when resolving the target requires reasoning over implicit multimodal
-            evidence. To address this limitation, we propose <b>PROME</b> (PROcedural Memory for
-            multimodal Evidence gathering), a lightweight agentic baseline that equips agents with
-            specialized audio-visual perception tools and procedural memory for deciding which
-            evidence to gather and how to combine it. PROME consistently improves both device
-            grounding and task execution across six Omni-LLMs.
+            evidence. As a lightweight agent baseline, we provide <b>PROME</b> (PROcedural Memory
+            for multimodal Evidence gathering), which equips agents with specialized audio-visual
+            perception tools and procedural memory for deciding which evidence to gather and how to
+            combine it. PROME consistently improves both device grounding and task execution across
+            six Omni-LLMs.
           </p>
         </div>
       </div>
@@ -202,7 +202,7 @@
             OmniSmartHome defines an <i>episode profile</i> along three dimensions: a
             <b>grounding type</b>, indicating which modality carries the evidence needed to resolve
             the intended target device; a <b>query type</b>, indicating what the user asks for; and a
-            <b>feasibility type</b>, indicating whether the request can be fulfilled in the scene.
+            <b>feasibility type</b>, indicating whether the request can be fulfilled or not.
             Every episode provides a visual observation of the room where the speaker is, a
             first-order Ambisonics recording of the spoken request together with the sounds of
             active devices, and the initial home state: rooms, devices, and household members.
@@ -248,32 +248,34 @@
       </div>
       <div class="column">
         <h3 class="title is-4">Five grounding types</h3>
+        <p class="grounding-intro">One explicit baseline (G0) and four implicit types (G1&ndash;G4)
+          that rely on non-verbal cues.</p>
         <table class="table is-fullwidth query-list grounding-list">
           <tbody>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #e9e9e9">G0</span></td>
               <td>Speech</td>
-              <td class="query-description">The user explicitly names the target device in the spoken utterance, requiring the agent to correctly recognize the speech.</td>
+              <td class="query-description">The user explicitly names the target device in the spoken utterance, so grounding reduces to speech recognition alone.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #c8e5ce">G1</span></td>
               <td>Gesture</td>
-              <td class="query-description">The user refers to the target deictically (&ldquo;turn <i>that</i> off&rdquo;) while pointing toward it, requiring the agent to interpret the gesture and ground it in the visual scene.</td>
+              <td class="query-description">The user refers to the target device deictically (&ldquo;Turn <i>that</i> off&rdquo;) while pointing toward it, requiring the agent to interpret the gesture and ground it in the visual scene.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #f7e4bf">G2</span></td>
               <td>Sound</td>
-              <td class="query-description">The target is specified by the sound it emits (&ldquo;stop that <i>humming noise</i>&rdquo;), requiring the agent to detect and localize the sound source and associate it with the corresponding device.</td>
+              <td class="query-description">The user refers to the target device by the sound it emits (&ldquo;Stop that <i>humming noise</i>&rdquo;), requiring the agent to detect and localize the sound source and associate it with the corresponding device.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #d8cfeb">G3</span></td>
               <td>Space</td>
-              <td class="query-description">The target is specified relative to the speaker&rsquo;s egocentric direction (&ldquo;turn off the light <i>on my left</i>&rdquo;), requiring the agent to reason about that direction from the speaker&rsquo;s perspective.</td>
+              <td class="query-description">The user refers to the target device using an egocentric direction (&ldquo;Turn off the light <i>on my left</i>&rdquo;), requiring the agent to reason about that direction from the user&rsquo;s perspective and identify the target located there.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #f5cfca">G4</span></td>
               <td>User identity</td>
-              <td class="query-description">The target depends on the identity of the speaker (&ldquo;turn off the AC in <i>my room</i>&rdquo;), requiring the agent to identify who is speaking and resolve the person-specific reference.</td>
+              <td class="query-description">The user refers to the target device through a possessive reference (&ldquo;Turn off the AC in <i>my room</i>&rdquo;), requiring the agent to identify who is speaking and resolve the corresponding person-specific reference.</td>
             </tr>
           </tbody>
         </table>
@@ -613,14 +615,14 @@
         <h2 class="title is-3">Simple agentic baseline</h2>
         <div class="content has-text-justified">
           <p>
-            Before operating a device, an agent in OmniSmartHome must first ground which device the
-            user is referring to. This requires actively gathering multimodal evidence and
-            integrating it according to how the request is grounded in the environment. To support
-            this process, we introduce <b>PROME</b> (<b>PRO</b>cedural <b>M</b>emory for multimodal
-            <b>E</b>vidence gathering), a lightweight agentic baseline for adaptive evidence
-            acquisition. PROME equips the agent with a set of <b>multimodal perception tools</b> and
-            augments its reasoning with a <b>procedural memory</b> that captures reusable strategies
-            for resolving grounding ambiguities.
+            Before operating a device, an agent is required to first resolve which device the user
+            refers to from audio-visual context. This involves actively gathering multimodal
+            evidence and integrating it differently depending on how the request is grounded in the
+            environment. To support this process, we introduce <b>PROME</b> (<b>PRO</b>cedural
+            <b>M</b>emory for multimodal <b>E</b>vidence gathering), a simple agent baseline. PROME
+            equips the agent with a set of <b>audio-visual perception tools</b> and augments its
+            reasoning with a <b>procedural memory</b> that guides when such tools should be invoked,
+            in what order, and how their outputs should be combined.
           </p>
         </div>
       </div>
@@ -629,14 +631,18 @@
     <div class="columns is-centered">
       <div class="column is-full-width has-text-centered">
         <a href="./assets/figures/agent.pdf" target="_blank" rel="noopener">
-          <img src="./assets/images/prome.webp" width="3200" height="948"
-               alt="Figure 4: PROME adds perception tools, a grounding ambiguity table, a state update, and a procedure policy to the baseline ReAct agent loop."
+          <img src="./assets/images/prome.webp" width="3200" height="951"
+               alt="Figure 4: PROME adds perception tools, a grounding ambiguity table, a state update, and a procedure policy to the base ReAct agent loop."
                loading="lazy">
         </a>
         <p class="figure-caption">
-          <b>Figure 4: Illustration of the agentic framework.</b> The baseline excludes the
-          components highlighted in orange, while PROME incorporates them. The figure visualizes the
-          roles and interactions of the episode components (E1&ndash;E4), simulator, tools, and evaluation.
+          <b>Figure 4: Illustration of our agent framework.</b> Components highlighted in orange are used
+          only by PROME. The agent receives the visual and acoustic observation and reasons about the target
+          device in a ReAct loop through simulator-interaction and perception tools. PROME additionally provides
+          procedural guidance. Once the target device is identified, the agent declares it and either queries its
+          information (Q1) or executes the requested operation (Q2&ndash;Q4) via simulator-interaction tools.
+          Grounding accuracy evaluates the declared target device, while goal accuracy is evaluated from the
+          simulator state or by an LLM judge.
         </p>
       </div>
     </div>
@@ -696,7 +702,7 @@
               <tr><th>Gemini-2.5-Pro</th><td class="col-all">81.0</td><td class="col-all">63.1</td><td>95.1</td><td>80.5</td><td>74.7</td><td>66.7</td><td>81.9</td><td>50.3</td><td>83.0</td><td>69.8</td><td>69.5</td><td>47.7</td></tr>
               <tr><th>Gemini-3.1-Pro (Preview)</th><td class="col-all">85.6</td><td class="col-all">73.4</td><td>95.3</td><td>81.0</td><td>76.4</td><td>71.5</td><td>97.6</td><td>80.9</td><td>87.5</td><td>79.2</td><td>72.4</td><td>57.3</td></tr>
               <tr><th>Qwen3.8-Omni-Flash</th><td class="col-all">81.7</td><td class="col-all">63.1</td><td>93.2</td><td>76.8</td><td>76.7</td><td>64.2</td><td>92.7</td><td>66.0</td><td>85.4</td><td>72.2</td><td>63.0</td><td>39.6</td></tr>
-              <tr class="group-row"><td colspan="13">Agent Baseline</td></tr>
+              <tr class="group-row"><td colspan="13">PROME</td></tr>
               <tr class="prome-row"><th rowspan="2">Qwen2.5-Omni + <b>PROME</b></th><td class="col-all">38.2</td><td class="col-all">22.4</td><td>61.5</td><td>34.6</td><td>41.0</td><td>28.1</td><td>35.1</td><td>14.2</td><td>28.1</td><td>22.9</td><td>22.9</td><td>11.7</td></tr>
               <tr class="gain-row"><td class="col-all"><span class="gain">+5.2</span></td><td class="col-all"><span class="gain">+4.8</span></td><td><span class="gain">+6.0</span></td><td><span class="gain">+9.1</span></td><td><span class="gain">+10.1</span></td><td><span class="gain">+8.7</span></td><td><span class="gain">+7.0</span></td><td><span class="gain">+0.0</span></td><td><span class="gain">+0.9</span></td><td><span class="gain">+5.5</span></td><td><span class="gain">+2.6</span></td><td><span class="gain">+0.8</span></td></tr>
               <tr class="prome-row"><th rowspan="2">Gemma4 + <b>PROME</b></th><td class="col-all">74.0</td><td class="col-all">59.3</td><td>86.2</td><td>73.4</td><td>65.3</td><td>58.3</td><td>89.6</td><td>70.8</td><td>75.7</td><td>58.3</td><td>55.5</td><td>37.8</td></tr>
@@ -715,29 +721,26 @@
 
         <div class="content has-text-justified">
           <p>
-            Small open-source models show generally low grounding accuracy across
-            all grounding types, with MiniCPM-o-4.5 performing best in this group. Their goal
+            <b>Base agents.</b> Small open-source models show generally low grounding accuracy
+            across all grounding types, with MiniCPM-o-4.5 performing best in this group. Their goal
             accuracy is often substantially lower than their grounding accuracy, in some cases by
             more than a factor of two: even when these models identify the target device, they still
-            struggle to complete the requested goal. Larger open-source models achieve higher overall
-            accuracy with a smaller gap between grounding and goal performance. Their grounding is
-            particularly strong on G0, where the target can be resolved from speech alone, but drops
-            on G1&ndash;G4, which require additional multimodal evidence. Proprietary models
-            generally outperform open-source models, yet show a similar gap between G0 and
-            G1&ndash;G4, with particularly large drops on G4. The contrast between nearly saturated
-            performance on G0 and lower performance on G1&ndash;G4 highlights multimodal grounding as
-            the primary challenge of the benchmark.
+            struggle to complete the requested goal. Larger open-source models achieve higher
+            overall accuracy with a smaller gap between grounding and goal performance. Their
+            grounding is strongest on G0, where identifying the target device requires little beyond
+            speech recognition, but drops on G1&ndash;G4, which require integrating additional
+            non-verbal evidence. Proprietary models generally outperform open-source models, yet
+            show a similar gap between G0 and G1&ndash;G4. For these stronger models, the contrast
+            between nearly saturated grounding and goal performance on G0 and lower performance on
+            G1&ndash;G4 highlights multimodal grounding as the primary challenge of the benchmark.
           </p>
           <p>
             <b>PROME.</b> PROME improves overall grounding and goal accuracy across all six
             backbones. Notably, Gemma4, the weakest larger open-source baseline, gains 23.4 / 34.1
             percentage points in grounding / goal accuracy, respectively, surpassing the other
-            open-source vanilla agents. PROME also improves the strong Gemini models by 4.5 / 6.1
+            open-source base agents. PROME also improves the strong Gemini models by 4.5 / 6.1
             points on Gemini-2.5-Flash and 4.0 / 6.1 points on Gemini-2.5-Pro. Across grounding
-            types, gains on G0 are limited, as these queries can be resolved from speech alone and
-            need little additional perceptual evidence or procedural guidance. In contrast,
-            G1&ndash;G4 benefit more from PROME, since they require acquiring and integrating
-            additional multimodal evidence.
+            types, as expected, gains are limited on G0 but larger on G1&ndash;G4.
           </p>
         </div>
       </div>
@@ -753,7 +756,7 @@
         <div class="content has-text-justified">
           <p>
             We categorize common grounding failures for Qwen3-Omni-Think, Gemini-2.5-Flash, and
-            Gemini-2.5-Pro, comparing the vanilla agents with PROME.
+            Gemini-2.5-Pro, comparing the base agents with PROME.
           </p>
         </div>
       </div>
@@ -763,11 +766,11 @@
       <div class="column is-full-width has-text-centered">
         <a href="./assets/figures/error_analysis.pdf" target="_blank" rel="noopener">
           <img src="./assets/images/error_analysis.webp" width="3200" height="665"
-               alt="Share of failed episodes per grounding type for Qwen3-Think, Gemini-2.5-Flash and Gemini-2.5-Pro, vanilla versus PROME: G1 split by same-type and different-type confusions, G2, G3 split by speaker facing the camera or facing away, and G4."
+               alt="Share of failed episodes per grounding type for Qwen3-Think, Gemini-2.5-Flash and Gemini-2.5-Pro, base agents versus PROME: G1 devices nearest to the user, G2 premature declarations, G3 split by speaker facing the camera or facing away, and G4 premature declarations."
                loading="lazy">
         </a>
         <p class="figure-caption">
-          <b>Figure 5: Grounding failures by grounding type (vanilla vs. PROME).</b>
+          <b>Figure 5: Grounding failures by grounding type (base agents vs. PROME).</b>
         </p>
       </div>
     </div>
@@ -777,37 +780,32 @@
         <div class="content has-text-justified error-list">
           <p>
             <span class="tag grounding-tag" style="background-color: #c8e5ce">G1</span> <b>Gesture.</b>
-            Most errors involve selecting the wrong device, either another instance of the same type
-            or a nearby device of a different type. Same-type confusion rises sharply as the number
-            of visually similar candidates increases, from 6&ndash;18% when the target type is
-            unique to 67&ndash;87% when three or more similar devices are present. Different-type
-            errors often arise when the model is drawn to a larger or more visually salient
-            neighboring appliance.
+            Among wrong-device errors, 45&ndash;59% select the candidate nearest to the user&rsquo;s
+            hand or body across models, suggesting that agents rely on proximity rather than the
+            pointing direction.
           </p>
           <p>
             <span class="tag grounding-tag" style="background-color: #f7e4bf">G2</span> <b>Sound.</b>
-            Vanilla agents often declare a source prematurely based on semantic priors about which
-            devices typically produce a given sound, rather than verifying candidate states or
-            acoustic evidence. For example, an alarm originating from a refrigerator may be
+            Base agents often declare the sound source prematurely, without checking the states of
+            multiple candidate devices. Instead, they rely on semantic priors about which devices
+            typically produce a given sound: an alarm originating from a refrigerator may be
             incorrectly attributed to a microwave simply because the agent assumes that microwaves
-            commonly emit alarm sounds. PROME reduces such errors by guiding the agents to localize
-            the sound source or inspect device attributes.
+            commonly emit alarm sounds. PROME reduces such errors by guiding the agent to localize
+            the sound source or inspect candidate device states.
           </p>
           <p>
             <span class="tag grounding-tag" style="background-color: #d8cfeb">G3</span> <b>Space.</b>
-            A major source of error is incorrect egocentric direction reasoning. Among directional
-            failures, more than 70% for the three models occur when the speaker faces the camera,
-            where the speaker&rsquo;s left&ndash;right directions are reversed relative to the
-            image. Errors are substantially less frequent when the speaker faces away from the
-            camera. With PROME, head-pose estimation helps resolve this viewpoint ambiguity and
-            reduces opposite-side declarations.
+            Directional failures depend strongly on the user&rsquo;s orientation. Over 70% of them
+            occur when the speaker faces the camera, where the speaker&rsquo;s left&ndash;right
+            directions are reversed relative to the image. Errors are substantially less frequent
+            when the speaker faces away from the camera. PROME resolves this ambiguity with
+            multimodal tools such as head-pose estimation, reducing opposite-side declarations.
           </p>
           <p>
             <span class="tag grounding-tag" style="background-color: #f5cfca">G4</span> <b>User identity.</b>
-            Many failures occur because the agent does not identify the speaker before resolving
-            person-specific references. The models often ignore references such as &ldquo;my
-            room&rdquo; and inspect the room of the speaker&rsquo;s current location. PROME reduces
-            these errors by encouraging identity-related evidence gathering.
+            Many identity failures occur when the agent declares a device without first identifying
+            who is speaking. PROME substantially reduces these cases by prompting the agent to
+            gather identity evidence before committing to a device.
           </p>
         </div>
       </div>
