@@ -1,0 +1,149 @@
+% requires: \usepackage{multirow}, \usepackage{subcaption}
+\begin{table*}[t]
+\centering
+\caption{\textbf{Results and analysis on \ours{}.} (a) Per-grounding-type results; small numbers denote the change in percentage points relative to the base agent. (b) Ablations on \ours{}. (c) Memory transfer across backbones. (d) Grounding accuracy on the real-world subset.}
+\label{tab:analysis}
+\vspace{-3mm}
+
+\begin{subtable}{\linewidth}
+\centering
+\renewcommand{\arraystretch}{1.10}
+\resizebox{\linewidth}{!}{%
+\footnotesize
+\begin{tabular}{
+l
+>{\columncolor{allshade}}C@{\hspace{2pt}}>{\columncolor{allshade}}C@{\hspace{8pt}}
+C@{\hspace{2pt}}C@{\hspace{8pt}}
+C@{\hspace{2pt}}C@{\hspace{8pt}}
+C@{\hspace{2pt}}C@{\hspace{8pt}}
+C@{\hspace{2pt}}C@{\hspace{8pt}}
+C@{\hspace{2pt}}C
+}
+\toprule
+& \multicolumn{2}{c}{\textbf{All}}
+& \multicolumn{2}{c}{\textbf{G0} Speech}
+& \multicolumn{2}{c}{\textbf{G1} Gesture}
+& \multicolumn{2}{c}{\textbf{G2} Sound}
+& \multicolumn{2}{c}{\textbf{G3} Space}
+& \multicolumn{2}{c}{\textbf{G4} Identity} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}\cmidrule(lr){12-13}
+\textbf{Model} & Gr. & Goal & Gr. & Goal & Gr. & Goal & Gr. & Goal & Gr. & Goal & Gr. & Goal \\
+\midrule
+
+\addlinespace[2pt]
+& 38.2 & 22.4 & 61.5 & 34.6 & 41.0 & 28.1 & 35.1 & 14.2 & 28.1 & 22.9 & 22.9 & 11.7 \\[-1pt]
+\multirow{-2}{*}{Qwen2.5-Omni + \textbf{\ours}}
+& \gain{+5.2} & \gain{+4.8}
+& \gain{+6.0} & \gain{+9.1}
+& \gain{+10.1} & \gain{+8.7}
+& \gain{+7.0} & \gain{+0.0}
+& \gain{+0.9} & \gain{+5.5}
+& \gain{+2.6} & \gain{+0.8} \\
+
+\addlinespace[2pt]
+& 74.0 & 59.3 & 86.2 & 73.4 & 65.3 & 58.3 & 89.6 & 70.8 & 75.7 & 58.3 & 55.5 & 37.8 \\[-1pt]
+\multirow{-2}{*}{Gemma4 + \textbf{\ours}}
+& \gain{+23.4} & \gain{+34.1}
+& \gain{+16.9} & \gain{+28.1}
+& \gain{+18.8} & \gain{+39.2}
+& \gain{+34.4} & \gain{+41.6}
+& \gain{+20.8} & \gain{+32.3}
+& \gain{+27.4} & \gain{+31.8} \\
+
+\addlinespace[2pt]
+& 65.2 & 49.1 & 88.8 & 66.7 & 64.9 & 55.6 & 70.1 & 53.8 & 70.8 & 57.6 & 33.9 & 16.9 \\[-1pt]
+\multirow{-2}{*}{Nemotron + \textbf{\ours}}
+& \gain{+2.5} & \gain{+4.6}
+& \gain{+2.3} & \gain{+5.8}
+& \loss{-0.4} & \gain{+3.2}
+& \gain{+2.7} & \gain{+6.6}
+& \gain{+5.9} & \gain{+6.2}
+& \gain{+2.1} & \gain{+1.8} \\
+
+\addlinespace[2pt]
+& 70.2 & 53.9 & 87.5 & 69.8 & 70.1 & 58.3 & 86.5 & 68.8 & 77.1 & 62.2 & 35.4 & 17.2 \\[-1pt]
+\multirow{-2}{*}{Qwen3-Think + \textbf{\ours}}
+& \gain{+4.3} & \gain{+5.5}
+& \loss{-0.3} & \gain{+2.4}
+& \gain{+4.1} & \gain{+1.7}
+& \gain{+6.6} & \gain{+11.9}
+& \gain{+4.9} & \gain{+7.0}
+& \gain{+6.8} & \gain{+5.5} \\
+
+\addlinespace[2pt]
+& 78.2 & 62.3 & 91.9 & 76.6 & 72.2 & 62.2 & 81.2 & 63.5 & 77.8 & 65.6 & 67.2 & 44.5 \\[-1pt]
+\multirow{-2}{*}{Gemini-2.5-Flash + \textbf{\ours}}
+& \gain{+4.5} & \gain{+6.1}
+& \loss{-2.1} & \loss{-0.2}
+& \gain{+2.8} & \gain{+2.1}
+& \gain{+6.9} & \gain{+8.6}
+& \loss{-0.3} & \gain{+2.4}
+& \gain{+14.6} & \gain{+15.9} \\
+
+\addlinespace[2pt]
+& 85.0 & 69.2 & 96.6 & 79.4 & 74.3 & 66.3 & 86.8 & 68.4 & 87.8 & 73.6 & 78.1 & 58.3 \\[-1pt]
+\multirow{-2}{*}{Gemini-2.5-Pro + \textbf{\ours}}
+& \gain{+4.0} & \gain{+6.1}
+& \gain{+1.5} & \loss{-1.1}
+& \loss{-0.4} & \loss{-0.4}
+& \gain{+4.9} & \gain{+18.1}
+& \gain{+4.8} & \gain{+3.8}
+& \gain{+8.6} & \gain{+10.6} \\
+
+\bottomrule
+\end{tabular}
+}
+\vspace{0.1mm}
+\caption{Results across grounding types (G0--G4).}
+\label{tab:prome_results}
+\end{subtable}
+
+\vspace{-1mm}
+
+% ================= (b)(c)(d) Ablation / transfer =================
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\begin{subtable}[c]{0.33\linewidth}
+  \centering
+  \begin{tabular}{lcccc}
+    \toprule
+    & \multicolumn{2}{c}{\scriptsize Gemini-2.5-Flash} & \multicolumn{2}{c}{\scriptsize Gemini-2.5-Pro} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+    Method & Gr. & Goal & Gr. & Goal \\
+    \midrule
+    Base         & 73.7 & 56.2 & 81.0 & 63.1 \\
+    +Tool           & \underline{75.2} & \underline{58.9} & \underline{83.9} & \underline{65.9} \\
+    +\textbf{\ours} & \textbf{78.2} & \textbf{62.3} & \textbf{85.0} & \textbf{69.2} \\
+    \bottomrule
+  \end{tabular}
+  \vspace{0.1mm}
+  \caption{Ablation of \ours{}.}
+  \label{tab:overall}
+\end{subtable}\hfill
+\begin{subtable}[c]{0.33\linewidth}
+  \centering
+  \begin{tabular}{lcccc}
+    \toprule
+    & \multicolumn{2}{c}{\scriptsize Gemma4} & \multicolumn{2}{c}{\scriptsize Nemotron3-Omni} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+    Method & Gr. & Goal & Gr. & Goal \\
+    \midrule
+    Base         & 50.6 & 25.2 & 62.7 & 44.5 \\
+    +Trans.\ Mem    & \underline{71.7} & \underline{51.7} & \underline{64.9} & \underline{48.7} \\
+    +\textbf{\ours} & \textbf{74.0} & \textbf{59.3} & \textbf{65.2} & \textbf{49.1} \\
+    \bottomrule
+  \end{tabular}
+  \vspace{0.1mm}
+  \caption{Memory transfer.}
+  \label{tab:mem_transfer}
+\end{subtable}\hfill
+\begin{subtable}[c]{0.31\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{table/24k/bar_realworld.pdf}
+  \vspace{0.1mm}
+  \caption{Real-world transfer.}
+  \label{fig:realworld}
+  
+\end{subtable}
+\vspace{-10mm}
+\end{table*}
