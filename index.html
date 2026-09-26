@@ -90,14 +90,13 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <a href="./assets/figures/main.pdf" target="_blank" rel="noopener">
-        <img src="./assets/images/overview.webp" width="3200" height="1378"
+        <img src="./assets/images/overview.webp" width="3200" height="1371"
              alt="Figure 1: The same air-conditioner request expressed through pointing, humming sounds, egocentric direction, and room ownership.">
       </a>
       <p class="figure-caption has-text-centered">
-        <b>Figure 1: Overview of OmniSmartHome.</b> In real-world interactions, a user&rsquo;s command such as
-        &quot;turn off the air conditioner in dad&rsquo;s room&quot; is often underspecified in language alone,
-        with the intended target device resolved from multimodal cues distributed across the surrounding
-        audio-visual context.
+        <b>Figure 1: Overview of OmniSmartHome.</b> In real-world interactions, a user&rsquo;s spoken request is often underspecified in language
+ alone, with the intended target device resolved from multimodal cues distributed across the
+ surrounding audio-visual context.
       </p>
     </div>
   </div>
@@ -167,23 +166,22 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Smart-home assistants are expected to handle the diverse, realistic requests that arise
-            in daily life. In such interactions, users often convey intent through cues beyond
-            language&mdash;a pointing gesture, an ambient sound, or surrounding context. Existing
-            smart-home benchmarks, however, are built largely around settings in which the
-            user&rsquo;s request is fully specified in text. To bridge this gap, we introduce
-            <b>OmniSmartHome</b>, a multimodal smart-home benchmark in which users indicate the
-            devices they intend to control through five types of multimodal cues: speech, gesture,
-            sound, space, and user identity. OmniSmartHome contains <b>1,360</b> synthetic and
-            <b>272</b> real-world episodes, each pairing visual observations with spatial audio. We
-            evaluate 16 omnimodal large language models (Omni-LLMs) and reveal that, although they
-            perform strongly when the target device is explicitly named in speech, performance drops
-            substantially when resolving the target requires reasoning over implicit multimodal
-            evidence. As a lightweight agent baseline, we provide <b>PROME</b> (PROcedural Memory
-            for multimodal Evidence gathering), which equips agents with specialized audio-visual
-            perception tools and procedural memory for deciding which evidence to gather and how to
-            combine it. PROME consistently improves both device grounding and task execution across
-            six Omni-LLMs.
+            Smart-home assistants are expected to handle diverse, realistic requests that arise in
+            daily life. In such interactions, users often rely on the surrounding multimodal
+            context&mdash;pointing at objects or referring to what they see or hear, leaving their
+            requests underspecified in language alone. Existing smart-home benchmarks, however,
+            express user requests solely through language, leaving context-dependent real-world
+            requests underexplored. To bridge this gap, we introduce <b>OmniSmartHome</b>, a
+            multimodal smart-home benchmark where each spoken request is paired with the surrounding
+            visual and spatial-audio context, providing complementary cues to disambiguate
+            underspecified requests. OmniSmartHome comprises <b>1,360</b> synthetic and <b>272</b>
+            real-world episodes. We evaluate 16 omnimodal large language models (Omni-LLMs) and
+            reveal that, while they perform strongly when speech alone sufficiently conveys the
+            user&rsquo;s intent, performance drops substantially when resolving it requires
+            reasoning over multimodal contextual cues. As a simple agent baseline, we provide
+            <b>PROME</b> (PROcedural Memory for multimodal Evidence gathering), which equips agents
+            with specialized audio-visual perception tools and procedural memory for orchestrating
+            their use. PROME generally improves performance across six Omni-LLMs.
           </p>
         </div>
       </div>
@@ -200,8 +198,8 @@
         <div class="content has-text-justified">
           <p>
             OmniSmartHome defines an <i>episode profile</i> along three dimensions: a
-            <b>grounding type</b>, indicating which modality carries the evidence needed to resolve
-            the intended target device; a <b>query type</b>, indicating what the user asks for; and a
+            <b>grounding type</b>, indicating which multimodal cue the user relies on to specify the
+            target device; a <b>query type</b>, indicating what the user asks for; and a
             <b>feasibility type</b>, indicating whether the request can be fulfilled or not.
             Every episode provides a visual observation of the room where the speaker is, a
             first-order Ambisonics recording of the spoken request together with the sounds of
@@ -242,14 +240,14 @@
                loading="lazy">
         </a>
         <p class="figure-caption">
-          <b>Figure 2: Taxonomy of OmniSmartHome.</b> Each episode is characterized by a grounding
-          type, a query type, and a feasibility type.
+          <b>Figure 2: Taxonomy of OmniSmartHome.</b> Each episode has a grounding, query, and
+          feasibility type.
         </p>
       </div>
       <div class="column">
         <h3 class="title is-4">Five grounding types</h3>
         <p class="grounding-intro">One explicit baseline (G0) and four implicit types (G1&ndash;G4)
-          that rely on non-verbal cues.</p>
+          that rely on multimodal contextual cues.</p>
         <table class="table is-fullwidth query-list grounding-list">
           <tbody>
             <tr>
@@ -265,17 +263,18 @@
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #f7e4bf">G2</span></td>
               <td>Sound</td>
-              <td class="query-description">The user refers to the target device by the sound it emits (&ldquo;Stop that <i>humming noise</i>&rdquo;), requiring the agent to detect and localize the sound source and associate it with the corresponding device.</td>
+              <td class="query-description">The user refers to the target device by the sound it emits (&ldquo;Silence that <i>humming noise</i>&rdquo;), requiring the agent to detect and localize the sound source and associate it with the corresponding device.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #d8cfeb">G3</span></td>
               <td>Space</td>
-              <td class="query-description">The user refers to the target device using an egocentric direction (&ldquo;Turn off the light <i>on my left</i>&rdquo;), requiring the agent to reason about that direction from the user&rsquo;s perspective and identify the target located there.</td>
+              <td class="query-description">The user refers to the target device using an egocentric direction (&ldquo;Turn off the light <i>on my right</i>&rdquo;), requiring the agent to reason about that direction from the user&rsquo;s perspective and identify the target located there.</td>
             </tr>
             <tr>
               <td><span class="tag grounding-tag" style="background-color: #f5cfca">G4</span></td>
               <td>User identity</td>
-              <td class="query-description">The user refers to the target device through a possessive reference (&ldquo;Turn off the AC in <i>my room</i>&rdquo;), requiring the agent to identify who is speaking and resolve the corresponding person-specific reference.</td>
+              <td class="query-description">The user refers to the target device through a possessive reference (&ldquo;Turn off the AC in <i>my room</i>&rdquo;), requiring the agent to identify the speaker by face or voice and resolve the reference against that
+ person&rsquo;s household profile.</td>
             </tr>
           </tbody>
         </table>
@@ -291,6 +290,7 @@
     <div class="container">
       <h2 class="title is-3 has-text-centered">Benchmark samples</h2>
       <p class="listen-note has-text-centered">Please use your headphones &#x1F3A7; for the best spatial audio experience.</p>
+      <p class="privacy-note has-text-centered">The released real-world videos are not anonymized; faces in the samples shown here are blurred for the anonymous submission.</p>
       <div class="tabs is-toggle is-centered is-small sample-toggle" role="tablist">
         <ul>
           <li class="is-active" data-sample-domain="syn"><a role="tab">Synthetic</a></li>
@@ -636,13 +636,14 @@
                loading="lazy">
         </a>
         <p class="figure-caption">
-          <b>Figure 4: Illustration of our agent framework.</b> Components highlighted in orange are used
-          only by PROME. The agent receives the visual and acoustic observation and reasons about the target
-          device in a ReAct loop through simulator-interaction and perception tools. PROME additionally provides
-          procedural guidance. Once the target device is identified, the agent declares it and either queries its
-          information (Q1) or executes the requested operation (Q2&ndash;Q4) via simulator-interaction tools.
-          Grounding accuracy evaluates the declared target device, while goal accuracy is evaluated from the
-          simulator state or by an LLM judge.
+          <b>Figure 4: Illustration of our agent framework.</b> Components highlighted in orange are
+          used only by PROME. The agent receives the visual and acoustic observations and
+          iteratively gathers evidence to identify the target device using simulator-interaction and
+          perception tools. PROME additionally provides procedural guidance. Once the target device
+          is identified, the agent declares it and either queries its information (Q1) or executes
+          the requested operation (Q2&ndash;Q4) via simulator-interaction tools. Grounding accuracy
+          evaluates the declared target device, while goal accuracy is evaluated from the simulator
+          state or by an LLM judge.
         </p>
       </div>
     </div>
@@ -675,7 +676,7 @@
               <b>Results on OmniSmartHome across grounding types (G0&ndash;G4), with and without PROME.</b>
               For each grounding type, we report grounding accuracy (Gr.) and goal accuracy (Goal),
               averaged over query types. For models with PROME, we also report the change in percentage
-              points relative to its vanilla backbone.
+              points relative to its base agent.
             </caption>
             <thead>
               <tr><th rowspan="2">Model</th><th colspan="2" class="has-text-centered col-all">All</th><th colspan="2" class="has-text-centered "><b>G0</b> Speech</th><th colspan="2" class="has-text-centered "><b>G1</b> Gesture</th><th colspan="2" class="has-text-centered "><b>G2</b> Sound</th><th colspan="2" class="has-text-centered "><b>G3</b> Space</th><th colspan="2" class="has-text-centered "><b>G4</b> User identity</th></tr>
@@ -728,8 +729,7 @@
             struggle to complete the requested goal. Larger open-source models achieve higher
             overall accuracy with a smaller gap between grounding and goal performance. Their
             grounding is strongest on G0, where identifying the target device requires little beyond
-            speech recognition, but drops on G1&ndash;G4, which require integrating additional
-            non-verbal evidence. Proprietary models generally outperform open-source models, yet
+            speech recognition, but drops on G1&ndash;G4, which require integrating additional multimodal evidence. Proprietary models generally outperform open-source models, yet
             show a similar gap between G0 and G1&ndash;G4. For these stronger models, the contrast
             between nearly saturated grounding and goal performance on G0 and lower performance on
             G1&ndash;G4 highlights multimodal grounding as the primary challenge of the benchmark.
@@ -755,8 +755,8 @@
         <h2 class="title is-3">Error analysis</h2>
         <div class="content has-text-justified">
           <p>
-            We categorize common grounding failures for Qwen3-Omni-Think, Gemini-2.5-Flash, and
-            Gemini-2.5-Pro, comparing the base agents with PROME.
+            We examine four representative grounding failures across Qwen3-Omni-Think, Gemma4,
+            Gemini-2.5-Flash, and Gemini-2.5-Pro, shown for both the base agents and PROME.
           </p>
         </div>
       </div>
@@ -765,8 +765,8 @@
     <div class="columns is-centered">
       <div class="column is-full-width has-text-centered">
         <a href="./assets/figures/error_analysis.pdf" target="_blank" rel="noopener">
-          <img src="./assets/images/error_analysis.webp" width="3200" height="665"
-               alt="Share of failed episodes per grounding type for Qwen3-Think, Gemini-2.5-Flash and Gemini-2.5-Pro, base agents versus PROME: G1 devices nearest to the user, G2 premature declarations, G3 split by speaker facing the camera or facing away, and G4 premature declarations."
+          <img src="./assets/images/error_analysis.webp" width="3200" height="532"
+               alt="Grounding failures per type for Qwen3-Think, Gemma4, Gemini-2.5-Flash and Gemini-2.5-Pro, base agents versus PROME: G1 devices nearest to the speaker, G2 premature sound-source declarations, G3 failure rate split by speaker facing the camera or facing away, and G4 episodes without any user lookup."
                loading="lazy">
         </a>
         <p class="figure-caption">
@@ -780,32 +780,34 @@
         <div class="content has-text-justified error-list">
           <p>
             <span class="tag grounding-tag" style="background-color: #c8e5ce">G1</span> <b>Gesture.</b>
-            Among wrong-device errors, 45&ndash;59% select the candidate nearest to the user&rsquo;s
-            hand or body across models, suggesting that agents rely on proximity rather than the
-            pointing direction.
+            In around 50% of the episodes where a base agent declares an incorrect device, the
+            chosen device is the one nearest to the speaker&rsquo;s hand or body. This suggests that
+            agents often fail to trace the pointing direction and instead fall back to selecting a
+            device near the gesture itself.
           </p>
           <p>
             <span class="tag grounding-tag" style="background-color: #f7e4bf">G2</span> <b>Sound.</b>
-            Base agents often declare the sound source prematurely, without checking the states of
-            multiple candidate devices. Instead, they rely on semantic priors about which devices
-            typically produce a given sound: an alarm originating from a refrigerator may be
-            incorrectly attributed to a microwave simply because the agent assumes that microwaves
-            commonly emit alarm sounds. PROME reduces such errors by guiding the agent to localize
-            the sound source or inspect candidate device states.
+            In around 20% of the episodes where a base agent declares an incorrect device, the agent
+            declares the sound source prematurely, without checking the state of any candidate
+            device, such as whether it is running or its alarm is active. Instead, the agent often
+            relies on semantic priors about which devices typically produce a given sound: an alarm
+            from a refrigerator is attributed to a microwave, since the agent assumes that
+            microwaves commonly emit alarm sounds. PROME reduces such errors by guiding the agent to
+            localize the sound source or inspect candidate device states.
           </p>
           <p>
             <span class="tag grounding-tag" style="background-color: #d8cfeb">G3</span> <b>Space.</b>
-            Directional failures depend strongly on the user&rsquo;s orientation. Over 70% of them
-            occur when the speaker faces the camera, where the speaker&rsquo;s left&ndash;right
-            directions are reversed relative to the image. Errors are substantially less frequent
-            when the speaker faces away from the camera. PROME resolves this ambiguity with
-            multimodal tools such as head-pose estimation, reducing opposite-side declarations.
+            When the speaker faces the camera, their left&ndash;right directions are reversed
+            relative to the image, and three models fail on over 70% of such cases, whereas error
+            rates remain low when the speaker faces away. This suggests that models struggle to
+            interpret directions from the speaker&rsquo;s egocentric perspective, while PROME
+            generally mitigates this failure.
           </p>
           <p>
             <span class="tag grounding-tag" style="background-color: #f5cfca">G4</span> <b>User identity.</b>
-            Many identity failures occur when the agent declares a device without first identifying
-            who is speaking. PROME substantially reduces these cases by prompting the agent to
-            gather identity evidence before committing to a device.
+            Resolving possessive references requires inspecting information about the user. Among
+            failed episodes, the figure reports the fraction in which the base agent does not
+            inspect any user-related information. PROME substantially reduces these cases.
           </p>
         </div>
       </div>

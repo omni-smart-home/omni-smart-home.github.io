@@ -469,7 +469,14 @@ video.sample-media {
   margin-right: 0.02em;
 }
 
-/* Headphone hint under the Benchmark samples title. */
+/* Notes under the Benchmark samples title. */
+.privacy-note {
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: -0.6rem;
+  margin-bottom: 1rem;
+}
+
 .listen-note {
   font-size: 0.85rem;
   color: #666;
